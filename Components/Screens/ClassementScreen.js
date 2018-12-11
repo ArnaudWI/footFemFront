@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, StyleSheet, ScrollView} from 'react-native';
 
 
 export default class GeneralClassementScreen extends React.Component {
@@ -7,9 +7,41 @@ export default class GeneralClassementScreen extends React.Component {
 
   render() {
     return (
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <Text>Classement général</Text>
+
+          <View style={styles.container}>
+            <Header/>
+            <ScrollView>
+              <Text>Classement général</Text>
+            </ScrollView>
+          </View>
+    );
+  };
+};
+
+class Header extends React.Component {
+  render() {
+    return (
+      <View style={styles.header}>
+        <Text style={styles.headertitle}>Classement</Text>
       </View>
     );
   };
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  header: {
+    flex: 0.15,
+    backgroundColor: '#4B85EA',
+    width: '100%',
+  },
+  headertitle: {
+    color: "#FFFFFF",
+    textAlign: 'center',
+    fontSize: 25,
+    fontWeight: 'bold',
+    marginTop: 25
+  }
+});
