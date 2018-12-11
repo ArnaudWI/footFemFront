@@ -2,12 +2,18 @@ import React from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {ButtonGroup} from 'react-native-elements';
 
-export default class GeneralClassementScreen extends React.Component {
+//import de mes screens
+import ButeusesScreen from '../Screens/Classement/ButeusesScreen';
+import PasseusesScreen from '../Screens/Classement/PasseusesScreen';
+import GeneralScreen from '../Screens/Classement/GeneralScreen'
+
+export default class ClassementScreen extends React.Component {
 
   constructor () {
     super()
     this.state = {
       selectedIndex: 0
+
     }
     this.updateIndex = this.updateIndex.bind(this)
   }
@@ -25,7 +31,6 @@ export default class GeneralClassementScreen extends React.Component {
 
           <View style={styles.container}>
             <Header/>
-            <ScrollView>
               <ButtonGroup
                 onPress={this.updateIndex}
                 selectedIndex={selectedIndex}
@@ -58,7 +63,12 @@ export default class GeneralClassementScreen extends React.Component {
                   color: '#393E41'
                 }}
               />
-              <Text>Classement général</Text>
+            <ScrollView>
+              {this.state.selectedIndex === 0 ? <GeneralScreen/> :
+                this.state.selectedIndex === 1 ? <ButeusesScreen/> :
+                this.state.selectedIndex === 2 ? <PasseusesScreen/> :
+                <Text>Erreur</Text>}
+
             </ScrollView>
           </View>
     );
