@@ -4,7 +4,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import {Ionicons, MatterialCommunityIcons} from '@expo/vector-icons';
 
 // imports de mes composants de navigation
-import {createBottomTabNavigator, createAppContainer, createStackNavigator} from 'react-navigation';
+import {createBottomTabNavigator, createAppContainer, createStackNavigator, createMaterialTopTabNavigator} from 'react-navigation';
 
 // imports de mes screens au sein de mon composant App et de ma navigation
 import RencontresScreen from '../Screens/RencontresScreen';
@@ -12,8 +12,9 @@ import ClassementScreen from '../Screens/ClassementScreen';
 import FavorisScreen from '../Screens/FavorisScreen';
 import EquipesScreen from '../Screens/EquipesScreen';
 
+
 // création de ma bottom navigation
-const MainNavigator = createBottomTabNavigator({
+const MainBottomNavigator = createBottomTabNavigator({
   Rencontres: RencontresScreen,
   Classement: ClassementScreen,
   Favoris: FavorisScreen,
@@ -40,15 +41,21 @@ const MainNavigator = createBottomTabNavigator({
     }
   }),
   tabBarOptions: {
-    activeTintColor: 'gold',
-    inactiveTintColor: 'gray',
-    backgroundColor: '#42a5f5'
+    activeTintColor: '#FAC05E',
+    inactiveTintColor: '#FFFFFF',
+    showLabel: false,
+    style: {
+      backgroundColor: '#4B85EA',
+    }
   }
 });
 
+
+
 // Création de ma navigation globale qui content à la fois mes pages non contenues dans la bottom navigation et les pages de la bottom navigation
 var StackNavigator = createStackNavigator({
-  MainNavigator: MainNavigator
+  MainBottomNavigator: MainBottomNavigator,
+  // MainTopNavigator: MainTopNavigator
 }, {headerMode: 'none'})
 
 export default Navigation = createAppContainer(StackNavigator);
