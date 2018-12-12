@@ -4,7 +4,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import {Ionicons, MatterialCommunityIcons} from '@expo/vector-icons';
 
 // imports de mes composants de navigation
-import {createBottomTabNavigator, createAppContainer, createStackNavigator, createMaterialTopTabNavigator} from 'react-navigation';
+import {createBottomTabNavigator, createAppContainer, createStackNavigator} from 'react-navigation';
 
 // imports de mes screens au sein de mon composant App et de ma navigation
 import RencontresScreen from '../Screens/RencontresScreen';
