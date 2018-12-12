@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    flex: 0.15,
+    height: 80,
     backgroundColor: '#4B85EA',
     width: '100%',
   },
