@@ -4,9 +4,41 @@ import { Col, Row, Grid } from 'react-native-easy-grid';
 import {Ionicons, MatterialCommunityIcons} from '@expo/vector-icons';
 
 export default class GeneralScreen extends React.Component {
+  constructor(props) {
+    super(props);
 
+    this.state = {
+      standings: {}
+    };
+  }
+
+  componentDidMount() {
+    fetch('https://footfembackend.herokuapp.com/standings/')
+      .then(response => response.json())
+      .then(data => {
+        this.setState({standings : data.classement})
+      });
+  }
 
   render() {
+    var dataTableau = Object.keys(this.state.standings)
+    // console.log(this.state.standings)
+    // console.log(keys)
+    // console.log(this.state.standings[dataTableau[11]])
+
+    var classement = dataTableau.map((team, i) =>
+      <ClassementGeneralContent
+        key={i}
+        position={i}
+        teamName={this.state.standings[team].teamName}
+        goalsDiff={this.state.standings[team].goalsDiff}
+        lose={this.state.standings[team].lose}
+        draw={this.state.standings[team].draw}
+        win={this.state.standings[team].win}
+        play={this.state.standings[team].play}
+        points={this.state.standings[team].points}
+      />
+    )
 
 
     return (
@@ -14,18 +46,7 @@ export default class GeneralScreen extends React.Component {
           <View style={styles.container}>
             <ScrollView>
               <ClassementGeneralIndication/>
-              <ClassementGeneralContent/>
-              <ClassementGeneralContent/>
-              <ClassementGeneralContent/>
-              <ClassementGeneralContent/>
-              <ClassementGeneralContent/>
-              <ClassementGeneralContent/>
-              <ClassementGeneralContent/>
-              <ClassementGeneralContent/>
-              <ClassementGeneralContent/>
-              <ClassementGeneralContent/>
-              <ClassementGeneralContent/>
-              <ClassementGeneralContent/>
+              {classement}
               <ClassementGeneralLegende/>
             </ScrollView>
           </View>
@@ -70,9 +91,18 @@ class ClassementGeneralContent extends React.Component {
   render() {
 
     return (
+
           <Grid style={styles.row}>
             <Col style={styles.colLeftClassement}>
-              <Text>10</Text>
+              <Text style = {
+                this.props.position === 10 || this.props.position === 11
+                  ? {color: '#EE6352', fontWeight: 'bold'}
+                  : this.props.position === 0 || this.props.position === 1
+                    ? {color:'#59CD90', fontWeight: 'bold'}
+                    : {color : '#393E41'}
+              }>
+                {this.props.position + 1}
+              </Text>
             </Col>
             <Col style={styles.colLeftClassement}>
               <Ionicons name="md-arrow-down" size={15} color="#EE6352" />
@@ -81,25 +111,25 @@ class ClassementGeneralContent extends React.Component {
               <Image style={styles.logoTeam} source={{ uri:'http://www.statsfootofeminin.fr/img/logo_ol.png'}}/>
             </Col>
             <Col style={styles.colNameTeam}>
-              <Text style={styles.textIndication} style={{fontWeight:'semiBold'}}>Olympique Lyonnais</Text>
+              <Text style={styles.textIndication} style={{fontWeight:'semiBold'}}>{this.props.teamName}</Text>
             </Col>
             <Col style={styles.colIndication}>
-              <Text style={styles.textIndication}>12</Text>
+              <Text style={styles.textIndication}>{this.props.play}</Text>
             </Col>
             <Col style={styles.colIndication}>
-              <Text style={styles.textIndication}>10</Text>
+              <Text style={styles.textIndication}>{this.props.win}</Text>
             </Col>
             <Col style={styles.colIndication}>
-              <Text style={styles.textIndication}>2</Text>
+              <Text style={styles.textIndication}>{this.props.draw}</Text>
             </Col>
             <Col style={styles.colIndication}>
-              <Text style={styles.textIndication}>0</Text>
+              <Text style={styles.textIndication}>{this.props.lose}</Text>
             </Col>
             <Col style={styles.colIndication}>
-              <Text style={styles.textIndication}>+33</Text>
+              <Text style={styles.textIndication}>{this.props.goalsDiff}</Text>
             </Col>
             <Col style={styles.colIndication}>
-              <Text style={styles.textIndication} style={{fontWeight:'semiBold'}}>32</Text>
+              <Text style={styles.textIndication} style={{fontWeight:'semiBold'}}>{this.props.points}</Text>
             </Col>
           </Grid>
     );
@@ -139,7 +169,7 @@ class ClassementGeneralLegende extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'F6F7EB'
+    backgroundColor: '#F6F7EB'
   },
   colIndicationTeam: {
     width: '60%',
