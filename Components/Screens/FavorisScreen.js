@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
-
+import HeaderScreen from '../Screens/HeaderScreen';
 
 export default class FavorisScreen extends React.Component {
 
@@ -10,7 +10,7 @@ export default class FavorisScreen extends React.Component {
       return (
 
             <View style={styles.container}>
-              <Header/>
+              <HeaderScreen title={'Favoris'}/>
               <ScrollView>
                 <Text>Favoris</Text>
               </ScrollView>
@@ -19,30 +19,9 @@ export default class FavorisScreen extends React.Component {
     };
   };
 
-  class Header extends React.Component {
-    render() {
-      return (
-        <View style={styles.header}>
-          <Text style={styles.headertitle}>Favoris</Text>
-        </View>
-      );
-    };
-  };
 
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-    },
-    header: {
-      flex: 0.15,
-      backgroundColor: '#4B85EA',
-      width: '100%',
-    },
-    headertitle: {
-      color: "#FFFFFF",
-      textAlign: 'center',
-      fontSize: 25,
-      fontWeight: 'bold',
-      marginTop: 25
     }
   });

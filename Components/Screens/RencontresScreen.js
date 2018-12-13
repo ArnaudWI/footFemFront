@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet, ScrollView, Image} from 'react-native';
-
+import HeaderScreen from '../Screens/HeaderScreen';
 
 export default class RencontresScreen extends React.Component {
 
@@ -9,7 +9,7 @@ export default class RencontresScreen extends React.Component {
       return (
 
             <View style={styles.container}>
-              <Header/>
+              <HeaderScreen title={'Rencontres'}/>
               <ScrollView>
                 <Rencontres/>
               </ScrollView>
@@ -18,15 +18,6 @@ export default class RencontresScreen extends React.Component {
     };
   };
 
-  class Header extends React.Component {
-    render() {
-      return (
-        <View style={styles.header}>
-          <Text style={styles.headertitle}>Rencontres</Text>
-        </View>
-      );
-    };
-  };
 
   class Rencontres extends React.Component {
     render() {
@@ -57,21 +48,6 @@ export default class RencontresScreen extends React.Component {
   };
 
   const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-    },
-    header: {
-      flex: 0.15,
-      backgroundColor: '#4B85EA',
-      width: '100%',
-    },
-    headertitle: {
-      color: "#FFFFFF",
-      textAlign: 'center',
-      fontSize: 25,
-      fontWeight: 'bold',
-      marginTop: 25
-    },
     homeTeamTitle: {
       color: '#393E41',
       fontSize: 14,
