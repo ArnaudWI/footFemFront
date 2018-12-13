@@ -1,8 +1,9 @@
 import React from 'react';
-import {View, Text, StyleSheet, ScrollView, Image, List, ListItem, Switch} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, Image, List, ListItem, Switch, Header} from 'react-native';
 import {Ionicons, MatterialCommunityIcons} from '@expo/vector-icons';
 import {Col, Row, Grid} from 'react-native-easy-grid';
 import {ButtonGroup} from 'react-native-elements';
+import HeaderScreen from '../Screens/HeaderScreen';
 
 
 export default class RencontresScreen extends React.Component {
@@ -21,7 +22,7 @@ export default class RencontresScreen extends React.Component {
 
   render() {
     return (<View style={styles.container}>
-      <Header/>
+      <HeaderScreen title={'Rencontres'}/>
         <Journee/>
       <ScrollView>
         <View style={styles.date}>
@@ -33,70 +34,7 @@ export default class RencontresScreen extends React.Component {
     </View>);
   };
 };
-// class ChoixJournee extends React.Component {
-//
-//   constructor () {
-//     super()
-//     this.state = {
-//       selectedIndex: 0
-//
-//     }
-//     this.updateIndex = this.updateIndex.bind(this)
-//   }
-//
-//   updateIndex (selectedIndex) {
-//     this.setState({selectedIndex})
-//   }
-//
-//
-//   render() {
-//     const buttons = [<Ionicons name="md-arrow-dropleft" size={26} color="#dddddd" />, '11ème Journée', <Ionicons name="md-arrow-dropright" size={26} color="#dddddd" />]
-//     const { selectedIndex } = this.state
-//
-//     return (
-//
-//               <ButtonGroup
-//                 onPress={this.updateIndex}
-//                 selectedIndex={selectedIndex}
-//                 buttons={buttons}
-//                 width={'100%'}
-//                 containerStyle={{
-//                   height: 50,
-//                   backgroundColor: '#393E41',
-//                   marginTop: 0,
-//                   marginLeft: 0,
-//                   marginRight: 0,
-//                   borderColor: '#393E41',
-//                   borderRadius: 0,
-//                   borderWidth: 0
-//                 }}
-//                 textStyle={{
-//                   color: '#dddddd'
-//                 }}
-//                 selectedTextStyle={{
-//                   color: '#dddddd',
-//                 }}
-//                 selectedButtonStyle={{
-//                   backgroundColor: '#393E41',
-//
-//                 }}
-//                 underlayColor={'#dddddd'}
-//                 innerBorderStyle={{
-//                   width: 0,
-//                   color: '#393E41'
-//                 }}
-//               />
-//             <ScrollView>
-//               {this.state.selectedIndex === 0 ? <GeneralScreen/> :
-//                 this.state.selectedIndex === 1 ? <ButeusesScreen/> :
-//                 this.state.selectedIndex === 2 ? <PasseusesScreen/> :
-//                 <Text>Erreur</Text>}
-//
-//             </ScrollView>
-//
-//     );
-//   };
-// };
+
 
 class Journee extends React.Component {
   render() {
@@ -189,14 +127,12 @@ const styles = StyleSheet.create({
     color: '#393E41',
     fontSize: 14,
     fontWeight: 'bold',
-    width: '25%',
     textAlign: 'right'
   },
   awayTeamTitle: {
     color: '#393E41',
     fontSize: 14,
     fontWeight: 'bold',
-    width: '25%',
     textAlign: 'left',
   },
   match: {
