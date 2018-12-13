@@ -4,6 +4,7 @@ import {Ionicons, MatterialCommunityIcons} from '@expo/vector-icons';
 import {Col, Row, Grid} from 'react-native-easy-grid';
 import {ButtonGroup} from 'react-native-elements';
 
+
 export default class RencontresScreen extends React.Component {
   constructor () {
     super()
@@ -32,33 +33,6 @@ export default class RencontresScreen extends React.Component {
     </View>);
   };
 };
-
-class Header extends React.Component {
-  state = {
-    switchValue: false
-  };
-
-  _handleToggleSwitch = () => this.setState(state => ({
-    switchValue: !state.switchValue
-  }));
-  render() {
-    return (<View style={styles.header}>
-      <Grid>
-        <Col style={{
-            width: '20%'
-          }}></Col>
-        <Col>
-          <Text style={styles.headertitle}>Rencontres</Text>
-        </Col>
-        <Col style={styles.toggleSwitch}>
-          <Text style={{color: "#FFFFFF", fontSize: 20}}>Live</Text>
-          <Switch onValueChange={this._handleToggleSwitch} value={this.state.switchValue}/>
-        </Col>
-      </Grid>
-    </View>);
-  };
-};
-
 // class ChoixJournee extends React.Component {
 //
 //   constructor () {
@@ -215,13 +189,15 @@ const styles = StyleSheet.create({
     color: '#393E41',
     fontSize: 14,
     fontWeight: 'bold',
+    width: '25%',
     textAlign: 'right'
   },
   awayTeamTitle: {
     color: '#393E41',
     fontSize: 14,
     fontWeight: 'bold',
-    textAlign: 'left'
+    width: '25%',
+    textAlign: 'left',
   },
   match: {
     borderTopWidth: 1,
@@ -229,7 +205,7 @@ const styles = StyleSheet.create({
     borderColor: '#D3D3D3',
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   matchInfo: {
     width: '14%',
@@ -240,8 +216,9 @@ const styles = StyleSheet.create({
   goalTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-
+    margin: 2,
   },
+
   colRencontres: {
     backgroundColor: '#F6F7EB',
     height: 80,
