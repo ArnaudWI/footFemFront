@@ -126,7 +126,7 @@ class ClassementGeneralContent extends React.Component {
               <Image style={styles.logoTeam} source={require('../../../public/logo/logo_ol.png')}/>}
             </Col>
             <Col style={styles.colNameTeam}>
-              <Text style={styles.textIndication} style={{fontWeight:'semiBold'}}>{this.props.teamName}</Text>
+              <Text style={styles.textIndication} style={{fontWeight:'semiBold'}}>{this.props.teamName.slice(0, -1)}</Text>
             </Col>
             <Col style={styles.colIndication}>
               <Text style={styles.textIndication}>{this.props.play}</Text>
