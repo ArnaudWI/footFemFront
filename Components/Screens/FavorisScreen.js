@@ -24,49 +24,67 @@ export default class FavorisScreen extends React.Component {
   //   this.setState({fontLoaded: true});
   // }
 
+    state = {
+      teams: {}
+    };
+
+  componentDidMount() {
+    fetch('https://footfembackend.herokuapp.com/teams/')
+      .then(response => response.json())
+      .then(data => {
+        this.setState({teams : data.teams})
+      });
+  }
 
   render() {
 
-    var teamData = [
-      {
-        name: 'Olympique Lyonnais',
-        img: 'ol'
-      },{
-        name: 'Paris Sain Germain',
-        img: 'psg'
-      },{
-        name: 'Fleury',
-        img: 'fleury'
-      },{
-        name: 'Montpellier',
-        img: 'mhsc'
-      },{
-        name: 'Soyaux',
-        img: 'asjs'
-      },{
-        name: 'Guingamp',
-        img: 'eag'
-      },{
-        name: 'LOSC',
-        img: 'losc2'
-      },{
-        name: 'Paris FC',
-        img: 'pfc'
-      },{
-        name: 'FC Metz',
-        img: 'fcm'
-      },{
-        name: 'Bordeaux',
-        img: 'gbfc'
-      },{
-        name: 'DFCO',
-        img: 'dfco'
-      }
-    ];
+    // var imgData = [
+    //   {
+    //     // name: 'Olympique Lyonnais',
+    //     img: 'ol'
+    //   },{
+    //     // name: 'Paris Sain Germain',
+    //     img: 'psg'
+    //   },{
+    //     // name: 'Fleury',
+    //     img: 'fleury'
+    //   },{
+    //     // name: 'Montpellier',
+    //     img: 'mhsc'
+    //   },{
+    //     // name: 'Soyaux',
+    //     img: 'asjs'
+    //   },{
+    //     // name: 'Guingamp',
+    //     img: 'eag'
+    //   },{
+    //     // name: 'LOSC',
+    //     img: 'losc2'
+    //   },{
+    //     // name: 'Paris FC',
+    //     img: 'pfc'
+    //   },{
+    //     // name: 'FC Metz',
+    //     img: 'fcm'
+    //   },{
+    //     // name: 'Bordeaux',
+    //     img: 'gbfc'
+    //   },{
+    //     // name: 'DFCO',
+    //     img: 'dfco'
+    //   }
+    // ];
 
-    var teamList = teamData.map(function(team, i) {
-      return <Teams key={i} teamName={team.name} teamImg={team.img}/>;
+    var ctx = this;
+    var teamData = Object.keys(this.state.teams)
+
+    var teamList = teamData.map(function(i) {
+      return <Teams key={i} teamName={ctx.state.teams[i].name} id={ctx.state.teams[i].api_id}/>;
     });
+
+    // var teamImg = imgData.map(function(team, i) {
+    //   return <Teams key={i} teamImg={team.img}/>;
+    // });
 
     return (
 
@@ -78,6 +96,7 @@ export default class FavorisScreen extends React.Component {
         this.state.fontLoaded ? ( */}
 
             <ScrollView>
+              {/* {teamImg} */}
               {teamList}
             </ScrollView>
 
@@ -117,10 +136,25 @@ export default class FavorisScreen extends React.Component {
 
           <Grid>
             <Col style={styles.colImage}>
-              <Image style={styles.image} source={{ uri: 'http://www.statsfootofeminin.fr/img/logo_'+this.props.teamImg+'.png' }} />
+              {/* <Image style={styles.image} source={{ uri: 'http://www.statsfootofeminin.fr/img/logo_'+this.props.teamImg+'.png' }} /> */}
+              {
+              this.props.id === 1667 ? <Image style={styles.image} source={require('../../public/logo/logo_psg.png')}/> :
+              this.props.id === 1674 ? <Image style={styles.image} source={require('../../public/logo/logo_ol.png')}/> :
+              this.props.id === 1675 ? <Image style={styles.image} source={require('../../public/logo/logo_mhsc.png')}/> :
+              this.props.id === 1676 ? <Image style={styles.image} source={require('../../public/logo/logo_pfc.png')}/> :
+              this.props.id === 1671 ? <Image style={styles.image} source={require('../../public/logo/logo_gbfc.png')}/> :
+              this.props.id === 1677 ? <Image style={styles.image} source={require('../../public/logo/logo_fleury.png')}/> :
+              this.props.id === 1672 ? <Image style={styles.image} source={require('../../public/logo/logo_eag.png')}/> :
+              this.props.id === 1679 ? <Image style={styles.image} source={require('../../public/logo/logo_dfco.png')}/> :
+              this.props.id === 1669 ? <Image style={styles.image} source={require('../../public/logo/logo_asjs.png')}/> :
+              this.props.id === 1678 ? <Image style={styles.image} source={require('../../public/logo/logo_losc.png')}/> :
+              this.props.id === 1664 ? <Image style={styles.image} source={require('../../public/logo/logo_fcm.png')}/> :
+              this.props.id === 1668 ? <Image style={styles.image} source={require('../../public/logo/logo_raf_2017.png')}/> :
+              <Image style={styles.image} source={require('../../public/logo/logo_raf_2017.png')}/>
+              }
             </Col>
             <Col style={styles.colTeam}>
-              <Text style={styles.team}>{this.props.teamName}</Text>
+              <Text style={styles.team}>{this.props.teamName.slice(0, -2)}</Text>
             </Col>
             <Col style={styles.colStar}>
               <Icon onPress={() => this.setState({star: !this.state.star})} name= {this.state.star ? "md-star" : "md-star-outline"} style= {this.state.star ? {color:"#FAC05E"} : {color:"#393E41"}}/>

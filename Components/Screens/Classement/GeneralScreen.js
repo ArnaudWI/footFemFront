@@ -108,7 +108,9 @@ class ClassementGeneralContent extends React.Component {
               </Text>
             </Col>
             <Col style={styles.colLeftClassement}>
-              <Ionicons name="md-arrow-down" size={15} color="#EE6352" />
+              {/* <Ionicons name="md-arrow-round-down" size={15} color="#EE6352" />
+              <Ionicons name="md-arrow-round-up" size={15} color="#59CD90" /> */}
+              <Ionicons name="md-remove" size={15} color="#FAC05E" />
             </Col>
             <Col style={styles.colLogoTeam}>
               {this.props.logo === '1674' ? <Image style={styles.logoTeam} source={require('../../../public/logo/logo_ol.png')}/> :
@@ -126,7 +128,7 @@ class ClassementGeneralContent extends React.Component {
               <Image style={styles.logoTeam} source={require('../../../public/logo/logo_ol.png')}/>}
             </Col>
             <Col style={styles.colNameTeam}>
-              <Text style={styles.textIndication} style={{fontWeight:'semiBold'}}>{this.props.teamName.slice(0, -1)}</Text>
+              <Text style={styles.textIndication} style={{fontWeight:'bold'}}>{this.props.teamName.slice(0, -2)}</Text>
             </Col>
             <Col style={styles.colIndication}>
               <Text style={styles.textIndication}>{this.props.play}</Text>
@@ -144,7 +146,7 @@ class ClassementGeneralContent extends React.Component {
               <Text style={styles.textIndication}>{this.props.goalsDiff}</Text>
             </Col>
             <Col style={styles.colIndication}>
-              <Text style={styles.textIndication} style={{fontWeight:'semiBold'}}>{this.props.points}</Text>
+              <Text style={styles.textIndication} style={{fontWeight:'bold'}}>{this.props.points}</Text>
             </Col>
           </Grid>
     );
@@ -217,8 +219,8 @@ const styles = StyleSheet.create({
     width: '10%'
   },
   logoTeam: {
-    height: 16,
-    width: 16
+    height: 20,
+    width: 20
   },
   textIndication: {
     fontSize: 10
