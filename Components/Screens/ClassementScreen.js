@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, ScrollView} from 'react-native';
+import {View, Text, ScrollView, StyleSheet} from 'react-native';
 import {ButtonGroup} from 'react-native-elements';
 
 //import de mes screens
@@ -30,7 +30,7 @@ export default class ClassementScreen extends React.Component {
 
     return (
 
-          <View>
+          <View style={styles.container}>
             <HeaderScreen title={"Classement"}/>
             <ButtonGroup
               onPress={this.updateIndex}
@@ -75,3 +75,9 @@ export default class ClassementScreen extends React.Component {
     );
   };
 };
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#F6F7EB'
+  }
+})

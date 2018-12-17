@@ -17,6 +17,7 @@ export default class GeneralScreen extends React.Component {
       .then(response => response.json())
       .then(data => {
         this.setState({standings : data.classement})
+
       });
   }
 
@@ -27,6 +28,7 @@ export default class GeneralScreen extends React.Component {
     // console.log(this.state.standings[dataTableau[11]])
 
     var classement = dataTableau.map((team, i) =>
+
       <ClassementGeneralContent
         key={i}
         position={i}
@@ -37,9 +39,9 @@ export default class GeneralScreen extends React.Component {
         win={this.state.standings[team].win}
         play={this.state.standings[team].play}
         points={this.state.standings[team].points}
+        logo={this.state.standings[team].team_id}
       />
     )
-
 
     return (
 
@@ -90,8 +92,9 @@ class ClassementGeneralContent extends React.Component {
 
   render() {
 
-    return (
 
+
+    return (
           <Grid style={styles.row}>
             <Col style={styles.colLeftClassement}>
               <Text style = {
@@ -105,13 +108,27 @@ class ClassementGeneralContent extends React.Component {
               </Text>
             </Col>
             <Col style={styles.colLeftClassement}>
-              <Ionicons name="md-arrow-down" size={15} color="#EE6352" />
+              {/* <Ionicons name="md-arrow-round-down" size={15} color="#EE6352" />
+              <Ionicons name="md-arrow-round-up" size={15} color="#59CD90" /> */}
+              <Ionicons name="md-remove" size={15} color="#FAC05E" />
             </Col>
             <Col style={styles.colLogoTeam}>
-              <Image style={styles.logoTeam} source={{ uri:'http://www.statsfootofeminin.fr/img/logo_ol.png'}}/>
+              {this.props.logo === '1674' ? <Image style={styles.logoTeam} source={require('../../../public/logo/logo_ol.png')}/> :
+              this.props.logo === '1667' ? <Image style={styles.logoTeam} source={require('../../../public/logo/logo_psg.png')}/> :
+              this.props.logo === '1675' ? <Image style={styles.logoTeam} source={require('../../../public/logo/logo_mhsc.png')}/> :
+              this.props.logo === '1676' ? <Image style={styles.logoTeam} source={require('../../../public/logo/logo_pfc.png')}/> :
+              this.props.logo === '1671' ? <Image style={styles.logoTeam} source={require('../../../public/logo/logo_gbfc.png')}/> :
+              this.props.logo === '1677' ? <Image style={styles.logoTeam} source={require('../../../public/logo/logo_fleury.png')}/> :
+              this.props.logo === '1672' ? <Image style={styles.logoTeam} source={require('../../../public/logo/logo_eag.png')}/> :
+              this.props.logo === '1679' ? <Image style={styles.logoTeam} source={require('../../../public/logo/logo_dfco.png')}/> :
+              this.props.logo === '1669' ? <Image style={styles.logoTeam} source={require('../../../public/logo/logo_asjs.png')}/> :
+              this.props.logo === '1678' ? <Image style={styles.logoTeam} source={require('../../../public/logo/logo_losc.png')}/> :
+              this.props.logo === '1664' ? <Image style={styles.logoTeam} source={require('../../../public/logo/logo_fcm.png')}/> :
+              this.props.logo === '1668' ? <Image style={styles.logoTeam} source={require('../../../public/logo/logo_raf_2017.png')}/> :
+              <Image style={styles.logoTeam} source={require('../../../public/logo/logo_ol.png')}/>}
             </Col>
             <Col style={styles.colNameTeam}>
-              <Text style={styles.textIndication} style={{fontWeight:'semiBold'}}>{this.props.teamName}</Text>
+              <Text style={styles.textIndication} style={{fontWeight:'bold'}}>{this.props.teamName.slice(0, -2)}</Text>
             </Col>
             <Col style={styles.colIndication}>
               <Text style={styles.textIndication}>{this.props.play}</Text>
@@ -129,7 +146,7 @@ class ClassementGeneralContent extends React.Component {
               <Text style={styles.textIndication}>{this.props.goalsDiff}</Text>
             </Col>
             <Col style={styles.colIndication}>
-              <Text style={styles.textIndication} style={{fontWeight:'semiBold'}}>{this.props.points}</Text>
+              <Text style={styles.textIndication} style={{fontWeight:'bold'}}>{this.props.points}</Text>
             </Col>
           </Grid>
     );
@@ -202,8 +219,8 @@ const styles = StyleSheet.create({
     width: '10%'
   },
   logoTeam: {
-    height: 16,
-    width: 16
+    height: 20,
+    width: 20
   },
   textIndication: {
     fontSize: 10
