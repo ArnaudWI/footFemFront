@@ -7,20 +7,43 @@ import HeaderScreen from '../Screens/HeaderScreen';
 
 
 export default class RencontresScreen extends React.Component {
-  constructor () {
-    super()
-    this.state = {
-      selectedIndex: 0
-
-    }
-    this.updateIndex = this.updateIndex.bind(this)
+  constructor() {
+    super();
+    this.state={
+  journee: {}
+};
   }
 
-  updateIndex (selectedIndex) {
-    this.setState({selectedIndex})
+  componentDidMount() {
+    fetch('https://footfembackend.herokuapp.com/journee')
+      .then(response => response.json())
+      .then(data => {
+        this.setState({journee: data.matchs})
+        console.log(data.matchs)
+      });
   }
 
   render() {
+
+    var dataMatch = Object.keys(this.state.journee)
+// console.log(this.state.journee[0])
+// console.log(this.state.journee[0][dataMatch[0]]);
+    var match = dataMatch.map((resultat, i) =>
+      <Rencontres
+        key={i}
+        position={i}
+        homeTeam={this.state.journee[resultat].homeTeam}
+        elapsed={this.state.journee[resultat].elapsed}
+        goalsHomeTeam={this.state.journee[resultat].goalsHomeTeam}
+        awayTeam={this.state.journee[resultat].awayTeam}
+        halftime_score={this.state.journee[resultat].halftime_score}
+        goalsAwayTeam={this.state.journee[resultat].goalsAwayTeam}
+        status={this.state.journee[resultat].status}
+        event_date={this.state.journee[resultat].event_date}
+
+      />
+    )
+
     return (<View style={styles.container}>
       <HeaderScreen title={'Rencontres'}/>
         <Journee/>
@@ -28,12 +51,13 @@ export default class RencontresScreen extends React.Component {
         <View style={styles.date}>
           <Text style={styles.eventDate}>Samedi 15 Décembre</Text>
         </View>
-        <Rencontres/>
+        {match}
 
       </ScrollView>
     </View>);
   };
 };
+
 
 
 class Journee extends React.Component {
@@ -66,26 +90,50 @@ class Rencontres extends React.Component {
           <Col>
           </Col>
           <Col style={styles.colTeam}>
-            <Text style={styles.homeTeamTitle}>FC Girondins de Bordeaux</Text>
+            <Text style={styles.homeTeamTitle}>{this.props.homeTeam}</Text>
           </Col>
           <Col style={styles.colLogo}>
             <Image style={{width: 25, height: 25}} source={{ uri:'http://www.statsfootofeminin.fr/img/logo_gbfc.png'}}
             />
           </Col>
           <Col style={styles.colScore}>
+            <Text style={styles.liveTime}>
+              {
+                this.props.status === 'Match Finished' ? <Text>Terminé</Text> :
+                this.props.status === 'Live' ? <Text style={styles.liveTime}>Live {this.props.elapsed}'</Text> :
+                <Text></Text>
+              }
+            </Text>
+            <Text style={styles.goalTitle}>
+              {
+                this.props.status === 'Not Started' ? <Text></Text> :
+                <Text>{this.props.goalsHomeTeam}</Text>
+              }
+              {
+                this.props.status === 'Not Started' ? <Text>{this.props.event_date.slice(11, -9)}</Text> :
+                <Text>-</Text>
+              }
+              {
+                this.props.status === 'Not Started' ? <Text></Text> :
+                <Text>{this.props.goalsAwayTeam}</Text>
+              }
+            </Text>
+            <Text style={styles.mtScore}>
+              {
+                this.props.status === 'Not started' ? <Text></Text> :
+                this.props.status === 'Kick Off' ? <Text style={styles.liveTime}>Live {this.props.elapsed}'</Text> :
 
-            {/* <Text style={styles.goalTitle}>14:30</Text> */}
-            <Text style={styles.liveTime}>Live 59'</Text>
-            <Text style={styles.goalTitle}>1-3</Text>
-            <Text style={styles.mtScore}>(0-1)</Text>
-
+                this.props.halftime_score === 'Null' ? <Text></Text> :
+                <Text>{this.props.halftime_score}</Text>
+              }
+            </Text>
           </Col>
           <Col style={styles.colLogo}>
             <Image style={{width: 25, height: 25}} source={{ uri:'http://www.statsfootofeminin.fr/img/logo_ol.png'}}
             />
           </Col>
           <Col style={styles.colTeam}>
-            <Text style={styles.awayTeamTitle}>Olympique Lyonnais</Text>
+            <Text style={styles.awayTeamTitle}>{this.props.awayTeam}</Text>
           </Col>
           <Col style={styles.colStar}>
             <Ionicons style={{paddingBottom: 25}} name="md-star-outline" size={32} color="#393E41" />
