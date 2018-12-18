@@ -40,6 +40,8 @@ export default class RencontresScreen extends React.Component {
         goalsAwayTeam={this.state.journee[resultat].goalsAwayTeam}
         status={this.state.journee[resultat].status}
         event_date={this.state.journee[resultat].event_date}
+        logoHomeTeam={this.state.journee[resultat].homeTeam_id}
+        logoAwayTeam={this.state.journee[resultat].awayTeam_id}
 
       />
     )
@@ -90,16 +92,27 @@ class Rencontres extends React.Component {
           <Col>
           </Col>
           <Col style={styles.colTeam}>
-            <Text style={styles.homeTeamTitle}>{this.props.homeTeam}</Text>
+            <Text style={styles.homeTeamTitle}>{this.props.homeTeam.slice(0, -2)}</Text>
           </Col>
           <Col style={styles.colLogo}>
-            <Image style={{width: 25, height: 25}} source={{ uri:'http://www.statsfootofeminin.fr/img/logo_gbfc.png'}}
-            />
+            {this.props.logoHomeTeam === '1674' ? <Image style={styles.logoTeam} source={require('../../public/logo/logo_ol.png')}/> :
+            this.props.logoHomeTeam === '1667' ? <Image style={styles.logoTeam} source={require('../../public/logo/logo_psg.png')}/> :
+            this.props.logoHomeTeam === '1675' ? <Image style={styles.logoTeam} source={require('../../public/logo/logo_mhsc.png')}/> :
+            this.props.logoHomeTeam === '1676' ? <Image style={styles.logoTeam} source={require('../../public/logo/logo_pfc.png')}/> :
+            this.props.logoHomeTeam === '1671' ? <Image style={styles.logoTeam} source={require('../../public/logo/logo_gbfc.png')}/> :
+            this.props.logoHomeTeam === '1677' ? <Image style={styles.logoTeam} source={require('../../public/logo/logo_fleury.png')}/> :
+            this.props.logoHomeTeam === '1672' ? <Image style={styles.logoTeam} source={require('../../public/logo/logo_eag.png')}/> :
+            this.props.logoHomeTeam === '1679' ? <Image style={styles.logoTeam} source={require('../../public/logo/logo_dfco.png')}/> :
+            this.props.logoHomeTeam === '1669' ? <Image style={styles.logoTeam} source={require('../../public/logo/logo_asjs.png')}/> :
+            this.props.logoHomeTeam === '1678' ? <Image style={styles.logoTeam} source={require('../../public/logo/logo_losc.png')}/> :
+            this.props.logoHomeTeam === '1664' ? <Image style={styles.logoTeam} source={require('../../public/logo/logo_fcm.png')}/> :
+            this.props.logoHomeTeam === '1668' ? <Image style={styles.logoTeam} source={require('../../public/logo/logo_raf_2017.png')}/> :
+            <Image style={styles.logoTeam} source={require('../../public/logo/logo_d1_seul.png')}/>}
           </Col>
           <Col style={styles.colScore}>
             <Text style={styles.liveTime}>
               {
-                this.props.status === 'Match Finished' ? <Text>Terminé</Text> :
+                this.props.status === 'Match Finished' ? <Text style={{color:'#393E41'}}>Fini</Text> :
                 this.props.status === 'Live' ? <Text style={styles.liveTime}>Live {this.props.elapsed}'</Text> :
                 <Text></Text>
               }
@@ -124,16 +137,27 @@ class Rencontres extends React.Component {
                 this.props.status === 'Kick Off' ? <Text style={styles.liveTime}>Live {this.props.elapsed}'</Text> :
 
                 this.props.halftime_score === 'Null' ? <Text></Text> :
-                <Text>{this.props.halftime_score}</Text>
+                <Text>({this.props.halftime_score})</Text>
               }
             </Text>
           </Col>
           <Col style={styles.colLogo}>
-            <Image style={{width: 25, height: 25}} source={{ uri:'http://www.statsfootofeminin.fr/img/logo_ol.png'}}
-            />
+            {this.props.logoAwayTeam === '1674' ? <Image style={styles.logoTeam} source={require('../../public/logo/logo_ol.png')}/> :
+            this.props.logoAwayTeam === '1667' ? <Image style={styles.logoTeam} source={require('../../public/logo/logo_psg.png')}/> :
+            this.props.logoAwayTeam === '1675' ? <Image style={styles.logoTeam} source={require('../../public/logo/logo_mhsc.png')}/> :
+            this.props.logoAwayTeam === '1676' ? <Image style={styles.logoTeam} source={require('../../public/logo/logo_pfc.png')}/> :
+            this.props.logoAwayTeam === '1671' ? <Image style={styles.logoTeam} source={require('../../public/logo/logo_gbfc.png')}/> :
+            this.props.logoAwayTeam === '1677' ? <Image style={styles.logoTeam} source={require('../../public/logo/logo_fleury.png')}/> :
+            this.props.logoAwayTeam === '1672' ? <Image style={styles.logoTeam} source={require('../../public/logo/logo_eag.png')}/> :
+            this.props.logoAwayTeam === '1679' ? <Image style={styles.logoTeam} source={require('../../public/logo/logo_dfco.png')}/> :
+            this.props.logoAwayTeam === '1669' ? <Image style={styles.logoTeam} source={require('../../public/logo/logo_asjs.png')}/> :
+            this.props.logoAwayTeam === '1678' ? <Image style={styles.logoTeam} source={require('../../public/logo/logo_losc.png')}/> :
+            this.props.logoAwayTeam === '1664' ? <Image style={styles.logoTeam} source={require('../../public/logo/logo_fcm.png')}/> :
+            this.props.logoAwayTeam === '1668' ? <Image style={styles.logoTeam} source={require('../../public/logo/logo_raf_2017.png')}/> :
+            <Image style={styles.logoTeam} source={require('../../public/logo/logo_d1_seul.png')}/>}
           </Col>
           <Col style={styles.colTeam}>
-            <Text style={styles.awayTeamTitle}>{this.props.awayTeam}</Text>
+            <Text style={styles.awayTeamTitle}>{this.props.awayTeam.slice(0, -2)}</Text>
           </Col>
           <Col style={styles.colStar}>
             <Ionicons style={{paddingBottom: 25}} name="md-star-outline" size={32} color="#393E41" />
@@ -201,6 +225,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     margin: 2,
+    color: '#393E41',
   },
 
   colRencontres: {
@@ -258,5 +283,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
 
-  }
+  },
+  logoTeam: {
+    height: 25,
+    width: 25
+  },
 });
