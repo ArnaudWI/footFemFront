@@ -5,13 +5,13 @@ import Navigation from './Components/Navigation/Navigation';
 
 // import de mes Reducers
 import teamStats from './Components/Reducers/stats.reducer'
-
+import teamClassement from './Components/Reducers/classement.reducer'
 // import de mes outils Redux
 import {Provider} from 'react-redux';
 import {createStore, combineReducers} from 'redux';
 
 // Création de mon Store
-const store = createStore(combineReducers({teamStats}));
+const store = createStore(combineReducers({teamStats, teamClassement}));
 
 export default class App extends React.Component {
   render() {

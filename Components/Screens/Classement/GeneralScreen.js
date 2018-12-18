@@ -2,8 +2,9 @@ import React from 'react';
 import {View, Text, StyleSheet, ScrollView, Image} from 'react-native';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import {Ionicons, MatterialCommunityIcons} from '@expo/vector-icons';
+import {connect} from 'react-redux';
 
-export default class GeneralScreen extends React.Component {
+class GeneralScreen extends React.Component {
   constructor(props) {
     super(props);
 
@@ -17,19 +18,19 @@ export default class GeneralScreen extends React.Component {
       .then(response => response.json())
       .then(data => {
         this.setState({standings : data.classement})
-
+        var classTab= Object.values(data.classement);
+        var classReduce = classTab.map((team, i) => {
+          this.props.ClassementTeam(team.team_id, i + 1)
+        })
       });
   }
 
   render() {
     var dataTableau = Object.keys(this.state.standings)
-    // console.log(this.state.standings)
-    // console.log(keys)
-    // console.log(this.state.standings[dataTableau[11]])
 
-    var classement = dataTableau.map((team, i) =>
 
-      <ClassementGeneralContent
+    var classement = dataTableau.map((team, i) => {
+    return  <ClassementGeneralContent
         key={i}
         position={i}
         teamName={this.state.standings[team].teamName}
@@ -41,7 +42,9 @@ export default class GeneralScreen extends React.Component {
         points={this.state.standings[team].points}
         logo={this.state.standings[team].team_id}
       />
-    )
+
+  })
+
 
     return (
 
@@ -233,3 +236,17 @@ const styles = StyleSheet.create({
     fontSize: 8
   }
 });
+
+function mapDispatchToProps(dispatch) {
+  return {
+    ClassementTeam: function(teamId, teamStanding) {
+      dispatch({
+        type: 'setStandingData',
+        teamId: teamId,
+        teamStanding: teamStanding
+      });
+    },
+  }
+};
+
+export default connect(null, mapDispatchToProps)(GeneralScreen);
