@@ -6,8 +6,8 @@ import Pie from 'react-native-fab-pie';
   export default class ChartNuls extends React.PureComponent {
     constructor(props) {
       super(props);
-      const data = [this.props.matchsNuls, this.props.matchsTotaux];
-      const colors = ['FAC05E', 'CCCCCC'];
+      const data = [this.props.matchsNuls, this.props.matchsTotaux-this.props.matchsNuls];
+      const colors = [this.props.matchsNuls==0?'CCCCCC':'FAC05E', 'CCCCCC'];
 
       const pieData = data
         .filter(value => value > 0)

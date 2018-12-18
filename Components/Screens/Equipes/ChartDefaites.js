@@ -6,11 +6,9 @@ import Pie from 'react-native-fab-pie';
   export default class ChartDefaites extends React.PureComponent {
     constructor(props) {
       super(props);
-      console.log("DEFAITES : ////////////////");
-      console.log("this.props.matchsPerdus :", this.props.matchsPerdus)
-      console.log("this.props.matchsTotaux :", this.props.matchsTotaux)
-      const data = [this.props.matchsPerdus, this.props.matchsTotaux];
-      const colors = ['EE6352', 'CCCCCC'];
+      const data = [this.props.matchsPerdus, this.props.matchsTotaux-this.props.matchsPerdus];
+      const colors = [ this.props.matchsPerdus==0?'CCCCCC':'EE6352', 'CCCCCC'];
+
 
       const pieData = data
         .filter(value => value > 0)

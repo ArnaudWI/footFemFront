@@ -5,28 +5,9 @@ import { Col, Row, Grid } from 'react-native-easy-grid';
 import HeaderScreen from '../Screens/HeaderScreen';
 import { withNavigation } from 'react-navigation';
 
-// ****** import de la police et du composant Icon ******
-// import { Font } from 'expo';
-// import Icon from '../Icon.js'
-
-// ****** Ionicons dejà inclu dans nativebase, il suffit d'importer Icon de nativebase *****
-// import { Ionicons } from '@expo/vector-icons';
-
-
-
 class FavorisScreen extends React.Component {
 
-  // state = {
-  //   fontLoaded: false
-  // }
-  //
-  // async componentDidMount() {
-  //   await Font.loadAsync({'testIcon': require('../../assets/fonts/testIcon.ttf')});
-  //
-  //   this.setState({fontLoaded: true});
-  // }
-
-    state = {
+state = {
       teams: {},
     };
 
@@ -40,71 +21,12 @@ class FavorisScreen extends React.Component {
 
   render() {
 
-    // var imgData = [
-    //   {
-    //     // name: 'Olympique Lyonnais',
-    //     img: 'ol'
-    //   },{
-    //     // name: 'Paris Sain Germain',
-    //     img: 'psg'
-    //   },{
-    //     // name: 'Fleury',
-    //     img: 'fleury'
-    //   },{
-    //     // name: 'Montpellier',
-    //     img: 'mhsc'
-    //   },{
-    //     // name: 'Soyaux',
-    //     img: 'asjs'
-    //   },{
-    //     // name: 'Guingamp',
-    //     img: 'eag'
-    //   },{
-    //     // name: 'LOSC',
-    //     img: 'losc2'
-    //   },{
-    //     // name: 'Paris FC',
-    //     img: 'pfc'
-    //   },{
-    //     // name: 'FC Metz',
-    //     img: 'fcm'
-    //   },{
-    //     // name: 'Bordeaux',
-    //     img: 'gbfc'
-    //   },{
-    //     // name: 'DFCO',
-    //     img: 'dfco'
-    //   }
-    // ];
-
     var ctx = this;
     var teamData = Object.keys(this.state.teams)
 
     var teamList = teamData.map(function(i) {
       return <TeamsNav key={i} teamName={ctx.state.teams[i].name} id={ctx.state.teams[i].api_id}/>;
     });
-
-    // var teamImg = imgData.map(function(team, i) {
-    //   return <Teams key={i} teamImg={team.img}/>;
-    // });
-
-    // var teamOrder = teamList.map(function(teamName, y) {
-    //   return { index: y, value: teamName };
-    // })
-    //
-    // teamOrder.sort(function(a, b) {
-    //   if (a.value > b.value) {
-    //     return 1;
-    //   }
-    //   if (a.value < b.value) {
-    //     return -1;
-    //   }
-    //   return 0;
-    // });
-    //
-    // var result = teamOrder.map(function(teamName){
-    //   return teamList[teamName.index];
-    // });
 
     return (
 
@@ -127,15 +49,6 @@ class FavorisScreen extends React.Component {
   };
 }
 
-  // class Header extends React.Component {
-  //   render() {
-  //     return (
-  //       <View style={styles.header}>
-  //         <Text style={styles.headertitle}>Favoris</Text>
-  //       </View>
-  //     );
-  //   };
-  // };
 
   class Teams extends React.Component {
 

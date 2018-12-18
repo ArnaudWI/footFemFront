@@ -8,8 +8,8 @@ import Pie from 'react-native-fab-pie';
       super(props);
       // console.log("this.props.matchsGagnes :", this.props.matchsGagnes)
       // console.log("this.props.matchsTotaux :", this.props.matchsTotaux)
-      const data = [this.props.matchsGagnes, this.props.matchsTotaux];
-      const colors = ['59CD90', 'CCCCCC'];
+      const data = [this.props.matchsGagnes, this.props.matchsTotaux-this.props.matchsGagnes];
+      const colors = [this.props.matchsGagnes==0?'CCCCCC':'59CD90', 'CCCCCC'];
 
       const pieData = data
         .filter(value => value > 0)

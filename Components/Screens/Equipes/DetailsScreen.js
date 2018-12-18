@@ -11,14 +11,12 @@ import MatchGagne from './MatchGagne';
 import MatchPerdu from './MatchPerdu';
 import MatchNul from './MatchNul';
 
-
-
-
 import {connect} from 'react-redux';
 
 class DetailsScreen extends React.Component {
   constructor(props) {
     super(props);
+    // console.log("props : ", this.props.teamStats.teamId)
     this.state = {
       team_id: this.props.teamStats.teamId,
       matchsGagnes: this.props.teamStats.matchsGagnes,
@@ -36,7 +34,7 @@ class DetailsScreen extends React.Component {
     // console.log("matchs perdus :", this.props.teamStats.matchsPerdus)
     // console.log("matchs matchsTotaux :", this.props.teamStats.matchsTotaux)
 
-    var teamApi_id = 1664;
+    var teamApi_id = this.props.teamStats.teamId;
     //récupération des 5 derniers résultats
     var ts = Date.now() / 1000;
     fetch(`https://footfembackend.herokuapp.com/fixtures/team/${teamApi_id}`)
@@ -51,7 +49,7 @@ class DetailsScreen extends React.Component {
         final_score : e.final_score
       }
     });
-    console.log("matchsTab : ", matchsTab)
+
     for (z in matchsTab) {
     // console.log(z);
     if (matchsTab[z].diffTemps > 0) {
@@ -105,8 +103,8 @@ class DetailsScreen extends React.Component {
     console.log("a partir d'ici, log de la page DETAILS /////////////////////////////////////////")
     // console.log(this.state.matchs[0].gnp)
       var badgeMatch = this.state.matchs.map((e,i) => {
-        console.log ("coucou")
-        console.log("e.gnp : ", e.gnp)
+        // console.log ("coucou")
+        // console.log("e.gnp : ", e.gnp)
         if (e.gnp=="gagne"){
           return <MatchGagne key={i} />
         }else if (e.gnp=="perdu"){

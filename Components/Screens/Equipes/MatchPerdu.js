@@ -69,7 +69,7 @@ import Pie from 'react-native-fab-pie';
               flex: 1,
             }}
             outerRadius={10}
-            innerRadius={1}
+            innerRadius={.01}
             data={this.state.pieData}
             animate
           >

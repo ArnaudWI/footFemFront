@@ -9,14 +9,13 @@ import DetailsScreen from './DetailsScreen';
 import MatchsScreen from './MatchsScreen'
 import HeaderScreen from '../HeaderScreen';
 
+import {connect} from 'react-redux';
 
-
-export default class StatsScreensList extends React.Component {
+class StatsScreensList extends React.Component {
 
   constructor () {
     super()
     this.state = {
-      teamId: 1664,
       selectedIndex: 0
 
     }
@@ -34,7 +33,7 @@ export default class StatsScreensList extends React.Component {
     return (
 
           <View>
-            <HeaderScreen title={"Equipe choisie"}/>
+            <HeaderScreen title={this.props.teamStats.teamName}/>
             <ButtonGroup
               onPress={this.updateIndex}
               selectedIndex={selectedIndex}
@@ -78,3 +77,11 @@ export default class StatsScreensList extends React.Component {
     );
   };
 };
+
+function mapStateToProps(state) {
+  return {
+    teamStats: state.teamStats,
+  };
+}
+
+export default connect(mapStateToProps, null)(StatsScreensList);

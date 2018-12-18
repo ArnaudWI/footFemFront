@@ -19,7 +19,7 @@ export default class RencontresScreen extends React.Component {
       .then(response => response.json())
       .then(data => {
         this.setState({journee: data.matchs})
-        console.log(data.matchs)
+        // console.log(data.matchs)
       });
   }
 
