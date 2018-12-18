@@ -11,7 +11,7 @@ import RencontresScreen from '../Screens/RencontresScreen';
 import ClassementScreen from '../Screens/ClassementScreen';
 import FavorisScreen from '../Screens/FavorisScreen';
 import EquipesScreen from '../Screens/EquipesScreen';
-
+import StatsScreensList from '../Screens/Equipes/StatsScreensList';
 
 // création de ma bottom navigation
 const MainBottomNavigator = createBottomTabNavigator({
@@ -55,6 +55,7 @@ const MainBottomNavigator = createBottomTabNavigator({
 // Création de ma navigation globale qui content à la fois mes pages non contenues dans la bottom navigation et les pages de la bottom navigation
 var StackNavigator = createStackNavigator({
   MainBottomNavigator: MainBottomNavigator,
+  StatsScreensList : StatsScreensList,
   // MainTopNavigator: MainTopNavigator
 }, {headerMode: 'none'})
 

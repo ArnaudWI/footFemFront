@@ -1,28 +1,43 @@
 import React from 'react';
 import {View, Text, StyleSheet, ScrollView, Image, List, ListItem, Switch, Header} from 'react-native';
+import { Badge} from 'native-base';
 import {Ionicons, MatterialCommunityIcons} from '@expo/vector-icons';
 import {Col, Row, Grid} from 'react-native-easy-grid';
 import {ButtonGroup} from 'react-native-elements';
+import ChartVictoires from './ChartVictoires';
+import ChartNuls from './ChartNuls';
+import ChartDefaites from './ChartDefaites';
+import MatchGagne from './MatchGagne';
+import MatchPerdu from './MatchPerdu';
+import MatchNul from './MatchNul';
 
-export default class DetailsScreen extends React.Component {
+
+
+
+import {connect} from 'react-redux';
+
+class DetailsScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      team_id: 1664,
-      stats: {},
+      team_id: this.props.teamStats.teamId,
+      matchsGagnes: this.props.teamStats.matchsGagnes,
+      matchsNuls: this.props.teamStats.matchsNuls,
+      matchsPerdus: this.props.teamStats.matchsPerdus,
+      matchsTotaux: this.props.teamStats.matchsTotaux,
       matchs:[]
     };
   }
-  componentDidMount() {
-    var teamApi_id =1664;//à remplacer par la team sur laquelle on a cliqué
-    fetch(`https://footfembackend.herokuapp.com/statistics/${teamApi_id}`)
-    .then(response => response.json())
-    .then(data => {
-      // console.log(data.result);
-        this.setState({stats : data.result})
-    })
-    .catch(e => console.error(e));
 
+
+  componentDidMount() {
+    // console.log("matchs gagnés :", this.props.teamStats.matchsGagnes)
+    // console.log("matchs nuls :", this.props.teamStats.matchsNuls)
+    // console.log("matchs perdus :", this.props.teamStats.matchsPerdus)
+    // console.log("matchs matchsTotaux :", this.props.teamStats.matchsTotaux)
+
+    var teamApi_id = 1664;
+    //récupération des 5 derniers résultats
     var ts = Date.now() / 1000;
     fetch(`https://footfembackend.herokuapp.com/fixtures/team/${teamApi_id}`)
     .then(response => response.json())
@@ -36,7 +51,7 @@ export default class DetailsScreen extends React.Component {
         final_score : e.final_score
       }
     });
-    // console.log("matchsTab : ", matchsTab)
+    console.log("matchsTab : ", matchsTab)
     for (z in matchsTab) {
     // console.log(z);
     if (matchsTab[z].diffTemps > 0) {
@@ -58,7 +73,7 @@ export default class DetailsScreen extends React.Component {
       for (var z in matchs5) {
         var score = matchs5[z].final_score.split(' ');
         if (score[0] == score[score.length - 1]) {
-          console.log("match nul")
+          // console.log("match nul")
           matchs5[z].gnp = "nul"
         }
         if (matchs5[z].homeTeam_id == this.state.team_id) {
@@ -87,24 +102,19 @@ export default class DetailsScreen extends React.Component {
   }
 
   render() {
-
-      var statsTab= Object.values(this.state.stats);
-        //fonction qui permet de récuperer des propriétés et valeurs d'objects imbriqués
-        const getNestedObject = (nestedObj, pathArr) => {
-          return pathArr.reduce((obj, key) =>
-          (obj && obj[key] !== 'undefined') ? obj[key] : undefined, nestedObj);
+    console.log("a partir d'ici, log de la page DETAILS /////////////////////////////////////////")
+    // console.log(this.state.matchs[0].gnp)
+      var badgeMatch = this.state.matchs.map((e,i) => {
+        console.log ("coucou")
+        console.log("e.gnp : ", e.gnp)
+        if (e.gnp=="gagne"){
+          return <MatchGagne key={i} />
+        }else if (e.gnp=="perdu"){
+          return <MatchPerdu key={i} />
+        }else if (e.gnp=="nul"){
+          return <MatchNul key={i} />
         }
-      // pass in your object structure as array elements
-      const matchsGagnes = getNestedObject(statsTab[0], ['wins', 'total']);
-      const matchsNuls = getNestedObject(statsTab[0], ['draws', 'total']);
-      const matchsPerdus = getNestedObject(statsTab[0], ['loses', 'total']);
 
-      // console.log("matchs gagnés :", matchsGagnes)
-      // console.log("matchs nuls :", matchsNuls)
-      // console.log("matchs perdus :", matchsPerdus)
-
-      var toto = this.state.matchs.map(e => {
-       console.log("e.gnp", e.gnp);
      });
 
 
@@ -113,9 +123,29 @@ export default class DetailsScreen extends React.Component {
 
           <View style={styles.container}>
             <ScrollView>
-
-              <Text>Statistiques équipe {};</Text>
-              <Text>Rang actuel : {"1ère"} du classement</Text>
+            <View style={styles.fondTitre}>
+              <Text style={styles.titre}>Saison 2018/2019</Text>
+            </View>
+            <View style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              marginVertical: 10
+            }}>
+            <ChartVictoires matchsGagnes={this.state.matchsGagnes} matchsTotaux={this.state.matchsTotaux} />
+            <ChartNuls matchsNuls={this.state.matchsNuls} matchsTotaux={this.state.matchsTotaux}  />
+            <ChartDefaites matchsPerdus={this.state.matchsPerdus} matchsTotaux={this.state.matchsTotaux}  />
+            </View>
+            <View style={styles.fondTitre}>
+              <Text style={styles.titre}>Rang actuel : {"1ère"} du classement</Text>
+              </View>
+              <View style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                marginVertical: 20
+              }}>
+              <Text>5 derniers matchs :  </Text>
+              {badgeMatch}
+              </View>
             </ScrollView>
           </View>
     );
@@ -128,12 +158,28 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F6F7EB'
   },
-  titre: {
+  fondTitre: {
     marginTop: 8,
     borderTopWidth: 1,
     borderColor: '#D3D3D3',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#e5e8ca',
+  },
+  titre: {
+    color: '#393E41',
+    height: 20,
+    fontSize: 14,
+    fontWeight: 'bold',
+    marginTop: 8,
   }
 });
+
+function mapStateToProps(state) {
+
+  return {
+    teamStats: state.teamStats,
+  };
+}
+
+export default connect(mapStateToProps, null)(DetailsScreen);

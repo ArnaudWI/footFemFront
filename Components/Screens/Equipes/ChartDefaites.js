@@ -6,8 +6,11 @@ import Pie from 'react-native-fab-pie';
   export default class ChartDefaites extends React.PureComponent {
     constructor(props) {
       super(props);
-      const data = [6, 13];
-      const colors = ['A40E4C', 'CCCCCC'];
+      console.log("DEFAITES : ////////////////");
+      console.log("this.props.matchsPerdus :", this.props.matchsPerdus)
+      console.log("this.props.matchsTotaux :", this.props.matchsTotaux)
+      const data = [this.props.matchsPerdus, this.props.matchsTotaux];
+      const colors = ['EE6352', 'CCCCCC'];
 
       const pieData = data
         .filter(value => value > 0)
@@ -40,7 +43,7 @@ import Pie from 'react-native-fab-pie';
       return (
         <View
           style={{
-            marginVertical: 5,
+            marginVertical: 0,
             marginHorizontal: 10,
             justifyContent: 'center',
             alignItems: 'center',
@@ -60,11 +63,11 @@ import Pie from 'react-native-fab-pie';
             containerStyle={{
               flexDirection: 'row',
               justifyContent: 'space-between',
-              marginVertical: 5,
+              marginVertical: 0,
             }}
             pieStyle={{
               width: 150,
-              height: 100,
+              height: 80,
               flex: 1,
             }}
             outerRadius={35}
