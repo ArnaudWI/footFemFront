@@ -12,42 +12,43 @@ import ClassementScreen from '../Screens/ClassementScreen';
 import FavorisScreen from '../Screens/FavorisScreen';
 import EquipesScreen from '../Screens/EquipesScreen';
 import StatsScreensList from '../Screens/Equipes/StatsScreensList';
+import NotificationsScreen from '../Screens/NotificationsScreen'
 
 // création de ma bottom navigation
 const MainBottomNavigator = createBottomTabNavigator({
-  Rencontres: RencontresScreen,
-  Classement: ClassementScreen,
-  Favoris: FavorisScreen,
-  Equipes: EquipesScreen
+ Rencontres: RencontresScreen,
+ Classement: ClassementScreen,
+ Favoris: FavorisScreen,
+ Equipes: EquipesScreen
 }, {
-  defaultNavigationOptions: ({navigation}) => ({
-    tabBarIcon: ({focused, horizontal, tintColor}) => {
-      var iconName;
-      var outline = (focused)
-        ? ''
-        : ''
-        // : '-outline';
-      if (navigation.state.routeName == 'Rencontres') {
-        iconName = 'ios-calendar';
-      } else if (navigation.state.routeName == 'Classement') {
-        iconName = 'ios-podium';
-      } else if (navigation.state.routeName == 'Favoris') {
-        iconName = 'ios-star';
-      } else if (navigation.state.routeName == 'Equipes') {
-        iconName = 'ios-shirt';
-      }
+ defaultNavigationOptions: ({navigation}) => ({
+   tabBarIcon: ({focused, horizontal, tintColor}) => {
+     var iconName;
+     var outline = (focused)
+       ? ''
+       : ''
+       // : '-outline';
+     if (navigation.state.routeName == 'Rencontres') {
+       iconName = 'ios-calendar';
+     } else if (navigation.state.routeName == 'Classement') {
+       iconName = 'ios-podium';
+     } else if (navigation.state.routeName == 'Favoris') {
+       iconName = 'ios-star';
+     } else if (navigation.state.routeName == 'Equipes') {
+       iconName = 'ios-shirt';
+     }
 
-      return <Ionicons name={iconName + outline} size={25} color={tintColor}/>;
-    }
-  }),
-  tabBarOptions: {
-    activeTintColor: '#FAC05E',
-    inactiveTintColor: '#FFFFFF',
-    showLabel: false,
-    style: {
-      backgroundColor: '#4B85EA',
-    }
-  }
+     return <Ionicons name={iconName + outline} size={25} color={tintColor}/>;
+   }
+ }),
+ tabBarOptions: {
+   activeTintColor: '#FAC05E',
+   inactiveTintColor: '#FFFFFF',
+   showLabel: false,
+   style: {
+     backgroundColor: '#4B85EA',
+   }
+ }
 });
 
 
@@ -56,6 +57,7 @@ const MainBottomNavigator = createBottomTabNavigator({
 var StackNavigator = createStackNavigator({
   MainBottomNavigator: MainBottomNavigator,
   StatsScreensList : StatsScreensList,
+  Notifications: NotificationsScreen,
   // MainTopNavigator: MainTopNavigator
 }, {headerMode: 'none'})
 

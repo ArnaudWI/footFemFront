@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {View, StyleSheet, ScrollView, Image} from 'react-native';
 import { Container, Content, List, ListItem, Thumbnail, Text, Right, Left, Body, Icon, Button } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
+import HeaderScreen from '../Screens/HeaderScreen';
+import { withNavigation } from 'react-navigation';
 
 // ****** import de la police et du composant Icon ******
 // import { Font } from 'expo';
@@ -12,7 +14,7 @@ import { Col, Row, Grid } from 'react-native-easy-grid';
 
 
 
-export default class FavorisScreen extends React.Component {
+class FavorisScreen extends React.Component {
 
   // state = {
   //   fontLoaded: false
@@ -25,7 +27,7 @@ export default class FavorisScreen extends React.Component {
   // }
 
     state = {
-      teams: {}
+      teams: {},
     };
 
   componentDidMount() {
@@ -79,24 +81,41 @@ export default class FavorisScreen extends React.Component {
     var teamData = Object.keys(this.state.teams)
 
     var teamList = teamData.map(function(i) {
-      return <Teams key={i} teamName={ctx.state.teams[i].name} id={ctx.state.teams[i].api_id}/>;
+      return <TeamsNav key={i} teamName={ctx.state.teams[i].name} id={ctx.state.teams[i].api_id}/>;
     });
 
     // var teamImg = imgData.map(function(team, i) {
     //   return <Teams key={i} teamImg={team.img}/>;
     // });
 
+    // var teamOrder = teamList.map(function(teamName, y) {
+    //   return { index: y, value: teamName };
+    // })
+    //
+    // teamOrder.sort(function(a, b) {
+    //   if (a.value > b.value) {
+    //     return 1;
+    //   }
+    //   if (a.value < b.value) {
+    //     return -1;
+    //   }
+    //   return 0;
+    // });
+    //
+    // var result = teamOrder.map(function(teamName){
+    //   return teamList[teamName.index];
+    // });
+
     return (
 
     <View style={styles.container}>
 
-      <Header/>
+      <HeaderScreen title={"Favoris"}/>
 
       {/* {
         this.state.fontLoaded ? ( */}
 
             <ScrollView>
-              {/* {teamImg} */}
               {teamList}
             </ScrollView>
 
@@ -108,15 +127,15 @@ export default class FavorisScreen extends React.Component {
   };
 }
 
-  class Header extends React.Component {
-    render() {
-      return (
-        <View style={styles.header}>
-          <Text style={styles.headertitle}>Favoris</Text>
-        </View>
-      );
-    };
-  };
+  // class Header extends React.Component {
+  //   render() {
+  //     return (
+  //       <View style={styles.header}>
+  //         <Text style={styles.headertitle}>Favoris</Text>
+  //       </View>
+  //     );
+  //   };
+  // };
 
   class Teams extends React.Component {
 
@@ -154,7 +173,9 @@ export default class FavorisScreen extends React.Component {
               }
             </Col>
             <Col style={styles.colTeam}>
-              <Text style={styles.team}>{this.props.teamName.slice(0, -2)}</Text>
+              <Text
+                onPress={ ()=> this.props.navigation.navigate('Notifications')}
+                style={styles.team}>{this.props.teamName.slice(0, -2)}</Text>
             </Col>
             <Col style={styles.colStar}>
               <Icon onPress={() => this.setState({star: !this.state.star})} name= {this.state.star ? "md-star" : "md-star-outline"} style= {this.state.star ? {color:"#FAC05E"} : {color:"#393E41"}}/>
@@ -165,6 +186,9 @@ export default class FavorisScreen extends React.Component {
       );
     };
   };
+
+  var TeamsNav = withNavigation(Teams)
+  export default FavorisScreen;
 
   const styles = StyleSheet.create({
     container: {
