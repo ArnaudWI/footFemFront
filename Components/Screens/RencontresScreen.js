@@ -83,12 +83,12 @@ class RencontresScreen extends React.Component {
       <HeaderScreen title={'Rencontres'}/>
         <Journee round={this.state.round} refreshJournee={this.refreshJournee}/>
       <ScrollView>
-        <View style={styles.date}>
+        {/* <View style={styles.date}>
           <Text style={styles.eventDate}>
             Samedi 15 Janvier
           </Text>
 
-        </View>
+        </View> */}
         {match}
 
       </ScrollView>
@@ -265,7 +265,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   match: {
-    borderTopWidth: 1,
+    borderBottomWidth: 1,
     height: 80,
     borderColor: '#D3D3D3',
     flexDirection: 'row',
