@@ -1,17 +1,23 @@
 import React from 'react';
 import {View, Text, StyleSheet, ScrollView, Image} from 'react-native';
-import { Col, Row, Grid } from 'react-native-easy-grid';
+import { Col, Row, Grid} from 'react-native-easy-grid';
 import {Ionicons, MatterialCommunityIcons} from '@expo/vector-icons';
 import {connect} from 'react-redux';
+import { Container, Header, Content, Spinner } from 'native-base';
 
 class GeneralScreen extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      standings: {}
+      standings: {},
+      loading: true
     };
   }
+
+
+
+
 
   componentDidMount() {
     fetch('https://footfembackend.herokuapp.com/standings/')
@@ -30,6 +36,9 @@ class GeneralScreen extends React.Component {
 
 
     var classement = dataTableau.map((team, i) => {
+      if (i === team.length) {
+        this.state.loading = false
+      }
     return  <ClassementGeneralContent
         key={i}
         position={i}
@@ -45,18 +54,24 @@ class GeneralScreen extends React.Component {
 
   })
 
-
+  if (this.state.loading) {
     return (
-
-          <View style={styles.container}>
-            <ScrollView>
-              <ClassementGeneralIndication/>
-              {classement}
-              <ClassementGeneralLegende/>
-            </ScrollView>
-          </View>
-    );
-  };
+      <View style={{alignItems: 'center', justifyContent: 'center', backgroundColor: 'white', height: 400}}>
+        <Spinner color='#000'/>
+      </View>
+      );
+  } else {
+    return (
+      <View>
+        <ScrollView>
+          <ClassementGeneralIndication/>
+          {classement}
+          <ClassementGeneralLegende/>
+        </ScrollView>
+      </View>
+    )
+  }
+};
 };
 
 class ClassementGeneralIndication extends React.Component {
