@@ -11,6 +11,7 @@ import RencontresScreen from '../Screens/RencontresScreen';
 import ClassementScreen from '../Screens/ClassementScreen';
 import FavorisScreen from '../Screens/FavorisScreen';
 import EquipesScreen from '../Screens/EquipesScreen';
+import NotificationsScreen from '../Screens/NotificationsScreen';
 import StatsScreensList from '../Screens/Equipes/StatsScreensList';
 import MatchScreen from '../Screens/MatchScreen';
 
@@ -58,6 +59,7 @@ var StackNavigator = createStackNavigator({
   MainBottomNavigator: MainBottomNavigator,
   StatsScreensList : StatsScreensList,
   Match : MatchScreen,
+  Notifications: NotificationsScreen,
   // MainTopNavigator: MainTopNavigator
 }, {headerMode: 'none'})
 

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import {View, StyleSheet, ScrollView, Image} from 'react-native';
+import {View, StyleSheet, ScrollView, Image, TouchableOpacity} from 'react-native';
 import { Container, Content, List, ListItem, Thumbnail, Text, Right, Left, Body, Icon, Button } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import HeaderScreen from '../Screens/HeaderScreen';
 import { withNavigation } from 'react-navigation';
+import Modal from "react-native-modal";
 
 import {connect} from 'react-redux';
 
@@ -93,16 +94,25 @@ class FavorisScreen extends React.Component {
   class Teams extends React.Component {
 
     state = {
-      star: false
+      star: false,
+      isModalVisible: false
     }
 
     onStarPress = () => {
       this.setState({star: !this.state.star});
       this.props.onStarClick();
+      if (!this.state.star) {
+        this._toggleModal();
+      }
+    };
+    _toggleModal = () =>
+      this.setState({ isModalVisible: !this.state.isModalVisible });
+
+    onTextPress = () => {
+      this.props.navigation.navigate('Notifications');
     };
 
     render() {
-
 
       return (
         // <View>
@@ -112,6 +122,14 @@ class FavorisScreen extends React.Component {
         // </View>
 
           <Grid>
+            <Modal isVisible={this.state.isModalVisible}>
+              <View style={styles.modal}>
+                <Text style={styles.modalText}><Icon name= "md-star" style= {{color:"#FAC05E"}} /> Favori Ajouté ! <Icon name= "md-star" style= {{color:"#FAC05E"}} /></Text>
+                <TouchableOpacity onPress={this._toggleModal}>
+                  <Text style={styles.modalButtonText}>OK</Text>
+                </TouchableOpacity>
+              </View>
+            </Modal>
             <Col style={styles.colImage}>
               {/* <Image style={styles.image} source={{ uri: 'http://www.statsfootofeminin.fr/img/logo_'+this.props.teamImg+'.png' }} /> */}
               {
@@ -132,7 +150,7 @@ class FavorisScreen extends React.Component {
             </Col>
             <Col style={styles.colTeam}>
               <Text
-                onPress={ ()=> this.props.navigation.navigate('Notifications')}
+                onPress={this.onTextPress}
                 style={styles.team}>{this.props.teamName.slice(0, -2)}</Text>
             </Col>
             <Col style={styles.colStar}>
@@ -150,8 +168,8 @@ class FavorisScreen extends React.Component {
   function mapDispatchToProps(dispatch) {
 
     return {
-      onStarClick: function() {
-        dispatch( {type: 'addFavoris'} )
+      onStarClick: function(id, teamName) {
+        dispatch( {type: 'addFavoris', id} )
       }
     };
   }
@@ -163,18 +181,6 @@ class FavorisScreen extends React.Component {
     container: {
       flex: 1,
       backgroundColor: "#F6F7EB"
-    },
-    header: {
-      height: 80,
-      backgroundColor: '#4B85EA',
-      width: '100%',
-    },
-    headertitle: {
-      color: "#FFFFFF",
-      textAlign: 'center',
-      fontSize: 25,
-      fontWeight: 'bold',
-      marginTop: 25
     },
     // teamName: {
     //   textAlign: 'left',
@@ -222,5 +228,24 @@ class FavorisScreen extends React.Component {
       borderBottomWidth: 1,
       borderColor: '#D3D3D3',
       justifyContent: 'center',
+    },
+    modalText: {
+      fontSize: 25,
+      marginBottom: 5
+    },
+    modalButtonText: {
+      backgroundColor: '#4B85EA',
+      color: '#F6F7EB',
+      margin: 5,
+      borderRadius: 50,
+      fontSize: 25,
+      padding: 10
+    },
+    modal: {
+      flex: 0.5,
+      backgroundColor: '#F6F7EB',
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 20,
     }
   });
