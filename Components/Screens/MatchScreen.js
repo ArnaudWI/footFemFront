@@ -31,7 +31,7 @@ class Journee extends React.Component {
     return (
       <View  style={styles.journee}>
       <Grid style={styles.gridJournee}>
-          <Text style={styles.textJournee}>11ème Journée</Text>
+          <Text style={styles.textJournee}>14ème Journée</Text>
       </Grid>
     </View>
     );
@@ -53,21 +53,21 @@ class MatchScore extends React.Component {
     return (
       <Grid style={styles.gridScore}>
         <Col style={styles.colTeam}>
-          <Text style={styles.textHomeTeam}>Lille</Text>
-        </Col>
-        <Col style={styles.colScore}>
-          <Image style={styles.logoTeam} source={require('../../public/logo/logo_losc.png')}/>
-        </Col>
-        <Col style={styles.colScore}>
-          <Text style={styles.mainScore}>1 - 2</Text>
-          <Text style={styles.scoreTextMT}>Score MT</Text>
-          <Text style={styles.scoreMT}>1 - 1</Text>
+          <Text style={styles.textHomeTeam}>FC Fleury 91</Text>
         </Col>
         <Col style={styles.colScore}>
           <Image style={styles.logoTeam} source={require('../../public/logo/logo_fleury.png')}/>
         </Col>
+        <Col style={styles.colScore}>
+          <Text style={styles.mainScore}>4 - 1</Text>
+          <Text style={styles.scoreTextMT}>Score MT</Text>
+          <Text style={styles.scoreMT}>3 - 0</Text>
+        </Col>
+        <Col style={styles.colScore}>
+          <Image style={styles.logoTeam} source={require('../../public/logo/logo_losc.png')}/>
+        </Col>
         <Col style={styles.colTeam}>
-          <Text style={styles.textAwayTeam}>FC Fleury 91</Text>
+          <Text style={styles.textAwayTeam}>Lille</Text>
         </Col>
       </Grid>
     );
@@ -91,7 +91,7 @@ class DetailsUn extends React.Component {
         <Grid>
           <Row  style={styles.rowDetails}>
             <Col style={styles.eventDetails}>
-              <Text style={styles.textEventHome}>A.Hegerberg</Text>
+              <Text style={styles.textEventHome}>J.Rabanne</Text>
             </Col>
             <Col style={styles.eventTime}>
               <Ionicons name="md-football" size={25} color="#393E41" />
@@ -102,27 +102,39 @@ class DetailsUn extends React.Component {
             </Col>
           </Row>
           <Row  style={styles.rowDetails}>
-            <Col style={styles.col50}>
-
+            <Col style={styles.eventDetails}>
+              <Text style={styles.textEventHome}>D.Dunord</Text>
             </Col>
             <Col style={styles.eventTime}>
               <Ionicons name="md-football" size={25} color="#393E41" />
-              <Text>33'</Text>
+              <Text>20'</Text>
             </Col>
-            <Col style={styles.eventDetails}>
-              <Text style={styles.textEventAway}>A.Moreau</Text>
+            <Col style={styles.col50}>
+
             </Col>
           </Row>
-          <Row style={styles.rowDetails}>
+          <Row  style={styles.rowDetails}>
             <Col style={styles.eventDetails}>
-              <Text style={styles.textEventHome}>E.Le Sommer</Text>
+              <Text style={styles.textEventHome}>A.Moreau</Text>
+            </Col>
+            <Col style={styles.eventTime}>
+              <Ionicons name="md-football" size={25} color="#393E41" />
+              <Text>38'</Text>
+            </Col>
+            <Col style={styles.col50}>
+
+            </Col>
+          </Row>
+          <Row  style={styles.rowDetails}>
+            <Col style={styles.col50}>
+
             </Col>
             <Col style={styles.eventTime}>
               <Ionicons name="md-square" size={25} color="#FAC05E" />
               <Text>43'</Text>
             </Col>
-            <Col style={styles.col50}>
-
+            <Col style={styles.eventDetails}>
+              <Text style={styles.textEventAway}>L.Bultel</Text>
             </Col>
           </Row>
         </Grid>
@@ -147,16 +159,16 @@ class DetailsDeux extends React.Component {
     return (
 
               <Grid>
-                <Row style={styles.rowDetails}>
-                  <Col style={styles.eventDetails}>
-                    <Text style={styles.textEventHome}>E.Le Sommer</Text>
-                  </Col>
-                  <Col style={styles.eventTime}>
-                    <Ionicons name="md-square" size={25} color="#EE6352" />
-                    <Text>58'</Text>
-                  </Col>
+                <Row  style={styles.rowDetails}>
                   <Col style={styles.col50}>
 
+                  </Col>
+                  <Col style={styles.eventTime}>
+                    <Ionicons name="md-football" size={25} color="#393E41" />
+                    <Text>47'</Text>
+                  </Col>
+                  <Col style={styles.eventDetails}>
+                    <Text style={styles.textEventAway}>D.Tolmais</Text>
                   </Col>
                 </Row>
                 <Row  style={styles.rowDetails}>
@@ -164,14 +176,25 @@ class DetailsDeux extends React.Component {
 
                   </Col>
                   <Col style={styles.eventTime}>
+                    <Ionicons name="md-square" size={25} color="#EE6352" />
+                    <Text>58'</Text>
+                  </Col>
+                  <Col style={styles.eventDetails}>
+                    <Text style={styles.textEventAway}>L.Bultel</Text>
+                  </Col>
+                </Row>
+                <Row  style={styles.rowDetails}>
+                  <Col style={styles.eventDetails}>
+                    <Text style={styles.textEventHome}>D.Dunord</Text>
+                  </Col>
+                  <Col style={styles.eventTime}>
                     <Ionicons name="md-football" size={25} color="#393E41" />
                     <Text>89'</Text>
                   </Col>
-                  <Col style={styles.eventDetails}>
-                    <Text style={styles.textEventAway}>A.Moreau</Text>
+                  <Col style={styles.col50}>
+
                   </Col>
                 </Row>
-
               </Grid>
 
     );
