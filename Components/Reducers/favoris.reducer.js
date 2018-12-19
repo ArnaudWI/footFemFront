@@ -1,46 +1,22 @@
-// export default function (idList = [], action) {
-//   console.log("reducer favoris idList :", action);
-//   if (action.type === 'addFavoris') {
-//     var idListCopy = [...idList];
-//     var starLiked = false;
-//     for (var i = 0; i < idListCopy.length; i++) {
-//       if (idListCopy[i].id === action.id) {
-//         starLiked = true;
-//         var idListCopyCopy = [...idListCopy];
-//         idListCopyCopy.splice(action.id)
-//         return idListCopyCopy;
-//       }
-//     }
-//     if (!starLiked) {
-//       idListCopy.push(action.id)
-//       return idListCopy;
-//     }
-//   } else {
-//     return idList;
-//   }
-// };
-
-
-
-
 export default function (idList = [], action) {
   console.log("reducer favoris idList :", action);
   if (action.type === 'addFavoris') {
-    var idListCopy = [...idList];
-    var starLiked = false;
-    for (var i = 0; i < idListCopy.length; i++) {
-      if (idListCopy[i].id === action.id) {
-        starLiked = true;
-        return idList;
+    var idListCopy =  [...idList];
+    //pour tous les éléments de listCopy
+    for (var z in idListCopy) {
+      //si on a déjà l'id dans listCopy
+      if (idList[z] === action.id) {
+        //on le retranche de la liste, puisqu'il ne fait plus partie des favoris
+        idListCopy.splice(z,1)
+          console.log("apres splice :", idListCopy);
+          return idListCopy;
       }
     }
-    if (!starLiked) {
-      idListCopy.push({
-        id: action.id,
-        teamName: action.teamName
-      })
+    //>> si le if n'est pas réalisé on ajoute l'id au tableau
+      idListCopy.push(action.id);
+      console.log(idListCopy);
       return idListCopy;
-    }
+
   } else {
     return idList;
   }

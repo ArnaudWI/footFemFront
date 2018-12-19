@@ -88,9 +88,9 @@ state = {
       isModalVisible: false
     }
 
-    onStarPress = () => {
+    onStarPress = (id) => {
       this.setState({star: !this.state.star});
-      this.props.onStarClick();
+      this.props.onStarClick(id);
       if (!this.state.star) {
         this._toggleModal();
       }
@@ -144,7 +144,7 @@ state = {
                 style={styles.team}>{this.props.teamName.slice(0, -2)}</Text>
             </Col>
             <Col style={styles.colStar}>
-              <Icon onPress= {this.onStarPress} name= {this.state.star ? "md-star" : "md-star-outline"} style= {this.state.star ? {color:"#FAC05E"} : {color:"#393E41"}}/>
+              <Icon onPress= {()=>this.onStarPress(this.props.id)} name= {this.state.star ? "md-star" : "md-star-outline"} style= {this.state.star ? {color:"#FAC05E"} : {color:"#393E41"}}/>
               {/* backgroundColor: 'yellow' */}
               {/* <Icon icon="star" style={styles.teamIcon} /> */}
             </Col>
@@ -158,7 +158,7 @@ state = {
   function mapDispatchToProps(dispatch) {
 
     return {
-      onStarClick: function(id, teamName) {
+      onStarClick: function(id) {
         dispatch( {type: 'addFavoris', id} )
       }
     };
