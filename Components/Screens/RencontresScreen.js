@@ -6,8 +6,10 @@ import {ButtonGroup} from 'react-native-elements';
 import HeaderScreen from '../Screens/HeaderScreen';
 import MatchScreen from '../Screens/MatchScreen';
 
+import {connect} from 'react-redux';
 
-export default class RencontresScreen extends React.Component {
+
+class RencontresScreen extends React.Component {
   constructor() {
     super();
     this.state={
@@ -28,11 +30,19 @@ export default class RencontresScreen extends React.Component {
       });
   }
 
+  goToMatch =(fixtureId) => {
+    //récupération des stats
+      this.props.matchSubmit(fixtureId);
+      this.props.navigation.navigate('Match');
+    }
+
   render() {
 
     var dataMatch = Object.keys(this.state.journee)
     var match = dataMatch.map((resultat, i) =>
       <Rencontres
+        fixtureId={this.state.journee[resultat].fixture_id}
+        getMatch={this.goToMatch}
         navigation={this.props.navigation}
         key={i}
         position={i}
@@ -56,7 +66,10 @@ export default class RencontresScreen extends React.Component {
         <Journee round={this.state.round}/>
       <ScrollView>
         <View style={styles.date}>
-          <Text style={styles.eventDate}>Samedi 15 Décembre</Text>
+          <Text style={styles.eventDate}>
+            salut
+          </Text>
+
         </View>
         {match}
 
@@ -65,20 +78,29 @@ export default class RencontresScreen extends React.Component {
   };
 };
 
-
+//
+// var testNum({this.props.round}) {
+//   if ({this.props.round} == 1) {
+//     return "re";
+//   } else {
+//     return "ème";
+//   }
+// };
 
 class Journee extends React.Component {
   render() {
     return (
       <View  style={styles.journee}>
       <Grid>
-        <Col style={{alignItems: 'center'}}>
+        <Col onPress={ ()=> this.props.navigation.navigate('JourneePrededant')} style={{alignItems: 'center'}}>
 
             <Ionicons name="md-arrow-dropleft" size={26} color="#dddddd" />
 
         </Col>
         <Col style={{alignItems: 'center', justifyContent: 'center'}}>
-          <Text style={{color: '#dddddd', fontWeight: 'bold', fontSize: 16}}>Journée {this.props.round}</Text>
+
+
+          <Text style={{color: '#dddddd', fontWeight: 'bold', fontSize: 16}}>{this.props.round} Journée</Text>
         </Col>
         <Col style={{alignItems: 'center'}}>
           <Ionicons name="md-arrow-dropright" size={26} color="#dddddd" />
@@ -96,9 +118,11 @@ class Rencontres extends React.Component {
       <Grid style={styles.match}>
           <Col>
           </Col>
-          <Col onPress={ ()=> this.props.navigation.navigate('Match')} style={styles.colRencontres}>
+          <Col onPress={()=>this.props.getMatch(this.props.fixtureId)} style={styles.colRencontres}>
             <Col style={styles.colTeam}>
-              <Text style={styles.homeTeamTitle}>{this.props.homeTeam.slice(0, -2)}</Text>
+              <View flex right>
+                <Text style={styles.homeTeamTitle}>{this.props.homeTeam.slice(0, -2)}</Text>
+              </View>
             </Col>
             <Col style={styles.colLogo}>
               {this.props.logoHomeTeam === '1674' ? <Image style={styles.logoTeam} source={require('../../public/logo/logo_ol.png')}/> :
@@ -167,7 +191,7 @@ class Rencontres extends React.Component {
             </Col>
           </Col>
           <Col style={styles.colStar}>
-            <Ionicons style={{paddingBottom: 25}} name="md-star-outline" size={32} color="#393E41" />
+            <Ionicons style={{paddingTop: '20%'}} name="md-notifications-outline" size={24} color="#393E41" />
           </Col>
 
       </Grid>
@@ -175,6 +199,20 @@ class Rencontres extends React.Component {
     );
   };
 };
+
+function mapDispatchToProps(dispatch) {
+  return {
+    matchSubmit: function(fixture) {
+      dispatch({
+        type: 'setFixtureId',
+        fixtureId: fixture,
+      });
+    },
+  }
+};
+
+export default connect(null, mapDispatchToProps)(RencontresScreen);
+
 
 const styles = StyleSheet.create({
   container: {
@@ -199,13 +237,11 @@ const styles = StyleSheet.create({
     color: '#393E41',
     fontSize: 14,
     fontWeight: 'bold',
-    alignSelf: 'flex-end',
   },
   awayTeamTitle: {
     color: '#393E41',
     fontSize: 14,
     fontWeight: 'bold',
-    alignItems: 'flex-end'
   },
   match: {
     borderTopWidth: 1,
@@ -214,7 +250,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   goalTitle: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
     margin: 2,
     color: '#393E41',
