@@ -69,36 +69,42 @@ class DetailsScreen extends React.Component {
       matchsAnte.sort(function(a, b) {
       return a.diffTemps - b.diffTemps
     })
+    // console.log("matchsAnte : ",matchsAnte)
     //on récupère les 5 matchs les plus récents
     var matchs5 =[];
     for (var z in matchsAnte){
       if(z < 5){
         matchs5.push(matchsAnte[z])
+        // console.log("matchAnte : 5 derniers : ", [z], " : ", matchs5[z].diffTemps  )
       }
     }
+
+
       /*Pour les 5 derniers matchs on compare le score domicile au score visiteur
       afin de déterminer si le match est gagné ou perdu (selon qu'il est joué à domicile ou non)*/
       for (var z in matchs5) {
         var score = matchs5[z].final_score.split(' ');
-        if (score[0] == score[score.length - 1]) {
-          // console.log("match nul")
-          matchs5[z].gnp = "nul"
-        }
         if (matchs5[z].homeTeam_id == this.state.team_id) {
-          if (score[0] < score[score.length - 1]) {
+          if (score[0] == score[score.length - 1]) {
+            console.log("domicile match nul", matchs5[z].diffTemps, [z])
+            matchs5[z].gnp = "nul"
+          }else if (score[0] < score[score.length - 1]) {
             matchs5[z].gnp = "perdu";
-            // console.log("domicile :", "perdu")
+            console.log("domicile :", "perdu", matchs5[z].diffTemps, [z])
           } else if (score[0] > score[score.length - 1]) {
             matchs5[z].gnp = "gagne";
-            // console.log("domicile :", "gagné")
+            console.log("domicile :", "gagné", matchs5[z].diffTemps, [z])
           }
         } else if (matchs5[z].homeTeam_id !== this.state.team_id) {
-          if (score[0] < score[score.length - 1]) {
+          if (score[0] == score[score.length - 1]) {
+            console.log("visiteur match nul", matchs5[z].diffTemps, [z])
+            matchs5[z].gnp = "nul"
+          }else if (score[0] < score[score.length - 1]) {
             matchs5[z].gnp = "gagne";
-            // console.log("visiteur :","gagné")
+            console.log("visiteur :","gagné", matchs5[z].diffTemps, [z])
           } else if (score[0] > score[score.length - 1]) {
             matchs5[z].gnp = "perdu";
-            // console.log("visiteur :","perdu")
+            console.log("visiteur :","perdu", matchs5[z].diffTemps, [z])
           }
         }
       }
@@ -110,7 +116,6 @@ class DetailsScreen extends React.Component {
   }
 
   render() {
-    console.log("a partir d'ici, log de la page DETAILS /////////////////////////////////////////")
     // console.log(this.state.matchs[0].gnp)
       var badgeMatch = this.state.matchs.map((e,i) => {
         // console.log ("coucou")
@@ -154,6 +159,9 @@ class DetailsScreen extends React.Component {
               <Text>5 derniers matchs :  </Text>
               {badgeMatch}
               </View>
+
+               <Image source={require("../../../public/jerseys/1667-207-away-PSG.png")}/>
+
             </ScrollView>
           </View>
     );
@@ -199,6 +207,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     marginTop: 0,
+  },
+  jerseyLeft:{
+
+
   }
 });
 
