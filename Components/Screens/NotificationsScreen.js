@@ -7,6 +7,13 @@ import HeaderScreen from '../Screens/HeaderScreen';
 
 export default class NotificationsScreen extends React.Component {
 
+  state = {
+    switchBut: false,
+    switchMitemps: false,
+    switchCompo: false,
+    switchScore: false
+  }
+
   render() {
 
     return (
@@ -31,7 +38,7 @@ export default class NotificationsScreen extends React.Component {
             <Text style={styles.textAlert}>Buts</Text>
           </Col>
           <Col style={styles.colToggle}>
-            <Switch style={styles.toggle} value={false} />
+            <Switch onChange= {()=>this.setState({switchBut: !this.state.switchBut})} style={styles.toggle} value={this.state.switchBut} />
           </Col>
         </Grid>
 
@@ -41,7 +48,7 @@ export default class NotificationsScreen extends React.Component {
             <Text style={styles.textAlert}>Début/Fin de période</Text>
           </Col>
           <Col style={styles.colToggle}>
-            <Switch style={styles.toggle} value={false} />
+            <Switch onChange= {()=>this.setState({switchMitemps: !this.state.switchMitemps})} style={styles.toggle} value={this.state.switchMitemps} />
           </Col>
         </Grid>
 
@@ -51,7 +58,7 @@ export default class NotificationsScreen extends React.Component {
             <Text style={styles.textAlert}>Composition</Text>
           </Col>
           <Col style={styles.colToggle}>
-            <Switch style={styles.toggle} value={false} />
+            <Switch onChange= {()=>this.setState({switchCompo: !this.state.switchCompo})} style={styles.toggle} value={this.state.switchCompo} />
           </Col>
         </Grid>
 
@@ -61,7 +68,7 @@ export default class NotificationsScreen extends React.Component {
             <Text style={styles.textAlert}>Score Final</Text>
           </Col>
           <Col style={styles.colToggle}>
-            <Switch style={styles.toggle} value={false} />
+            <Switch onChange= {()=>this.setState({switchScore: !this.state.switchScore})} style={styles.toggle} value={this.state.switchScore} />
           </Col>
         </Grid>
       </ScrollView>
@@ -123,7 +130,7 @@ const styles = StyleSheet.create({
     marginRight: 40
   },
   textAlert: {
-    fontSize: 20,
+    fontSize: 15,
     paddingTop: 30,
     // paddingLeft: 40
   }
