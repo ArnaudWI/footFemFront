@@ -7,104 +7,143 @@ export default class EffectifsScreen extends React.Component {
 
   render() {
 
-    var players = [
-      {
-        name: "Marie-Antoinette Katoto",
-        nationality: 15,
-        teamId: 1667
-      },
-      {
-        name: "Ada Hegerberg",
-        nationality: 15,
-        teamId: 1674
-      },
-      {
-        name: "Linda Sallstrom",
-        nationality: 9,
-        teamId: 1676
-      },
-      {
-        name: "Clarisse Le Bihan",
-        nationality: 9,
-        teamId: 1675
-      },
-      {
-        name: "Kadidiatou Diani",
-        nationality: 9,
-        teamId: 1667
-      },
-      {
-        name: "Eugénie Le Sommer",
-        nationality: 8,
-        teamId: 1674
-      },
-      {
-        name: "Amel Majri",
-        nationality: 8,
-        teamId: 1674
-      },
-      {
-        name: "Viviane Asseyi",
-        nationality: 7,
-        teamId: 1671
-      },
-      {
-        name: "Adelie Fourre",
-        nationality: 7,
-        teamId: 1672
-      },
-      {
-        name: "Stina Blackstenius",
-        nationality: 6,
-        teamId: 1675
-      },
-      {
-        name: "Léa Declercq",
-        nationality: 6,
-        teamId: 1679
-      },
-      {
-        name: "Marie-Charlotte Léger",
-        nationality: 6,
-        teamId: 1677
-      },
-      {
-        name: "Dzsenifer Marozsán",
-        nationality: 6,
-        teamId: 1674
-      },
-      {
-        name: "Kenza Dali",
-        nationality: 5,
-        teamId: 1679
-      },
-      {
-        name: "Wendie Renard",
-        nationality: 5,
-        teamId: 1674
-      },
-    ]
-
-
-    var buteuses = players.map((buteuse, i) =>
-
-      <ClassementButeusesContent
-        key={i}
-        position={i}
-        name={buteuse.name}
-        nationality={buteuse.nationality}
-        logo={buteuse.teamId}
-      />
-    )
+    // var players = [
+    //   {
+    //     name: "Pauline Benoist",
+    //     nationality: '../../public/flag-icons/FR.png',
+    //     number: 1
+    //   },
+    //   {
+    //     name: "Maryne Gignoux-Soulier",
+    //     nationality: '../../public/flag-icons/FR.png',
+    //     number: 16
+    //   },
+    //   {
+    //     name: "Blandine Joly",
+    //     nationality: '../../public/flag-icons/FR.png',
+    //     number: 30
+    //   },
+    //   {
+    //     name: "Gwenaëlle Butel",
+    //     nationality: '../../public/flag-icons/FR.png',
+    //     number: 2
+    //   },
+    //   {
+    //     name: "Kelly Gadea",
+    //     nationality: '../../public/flag-icons/FR.png',
+    //     number: 3
+    //   },
+    //   {
+    //     name: "Marine Haupais",
+    //     nationality: '../../public/flag-icons/FR.png',
+    //     number: 4
+    //   },
+    //   {
+    //     name: "Léna Jouan",
+    //     nationality: '../../public/flag-icons/FR.png',
+    //     number: 28
+    //   },
+    //   {
+    //     name: "Léonie Multari",
+    //     nationality: '../../public/flag-icons/FR.png',
+    //     number: 5
+    //   },
+    //   {
+    //     name: "Mélissa Roy",
+    //     nationality: '../../public/flag-icons/FR.png',
+    //     number: 26
+    //   },
+    //   {
+    //     name: "Teninsoun Sissoko",
+    //     nationality: '../../public/flag-icons/FR.png',
+    //     number: 17
+    //   },
+    //   {
+    //     name: "Salma Amani",
+    //     nationality: '../../public/flag-icons/FR.png',
+    //     number: 7
+    //   },
+    //   {
+    //     name: "Céline Chatelain",
+    //     nationality: '../../public/flag-icons/FR.png',
+    //     number: 12
+    //   },
+    //   {
+    //     name: "Aude Moreau",
+    //     nationality: '../../public/flag-icons/FR.png',
+    //     number: 6
+    //   },
+    //   {
+    //     name: "Maéva Clémaron",
+    //     nationality: '../../public/flag-icons/FR.png',
+    //     number: 21
+    //   },
+    //   {
+    //     name: "Daphné Corboz",
+    //     nationality: '../../public/flag-icons/US.png',
+    //     number: 8
+    //   },
+    //   {
+    //     name: "Rachel Corboz",
+    //     nationality: '../../../public/flag-icons/US.png',
+    //     number: 24
+    //   },
+    //   {
+    //     name: "Charlotte Fernandes",
+    //     nationality: '../../public/flag-icons/FR.png',
+    //     number: 13
+    //   },
+    //   {
+    //     name: "Nadjma Ali Nadjim",
+    //     nationality: '../../public/flag-icons/FR.png',
+    //     number: 11
+    //   },
+    //   {
+    //     name: "Danaé Dunord",
+    //     nationality: '../../public/flag-icons/FR.png',
+    //     number: 14
+    //   },
+    //   {
+    //     name: "Alexandria Lamontagne",
+    //     nationality: '../../public/flag-icons/FR.png',
+    //     number: 19
+    //   },
+    //   {
+    //     name: "Marie-Charlotte Léger",
+    //     nationality: '../../public/flag-icons/FR.png',
+    //     number: 15
+    //   },
+    //   {
+    //     name: "Julie Rabanne",
+    //     nationality: '../../public/flag-icons/FR.png',
+    //     number: 10
+    //   },
+    //   {
+    //     name: "Sarah Palacin",
+    //     nationality: '../../public/flag-icons/FR.png',
+    //     number: 9
+    //   },
+    //
+    // ]
+    //
+    //
+    // var buteuses = players.map((buteuse, i) =>
+    //
+    //   <ClassementButeusesContent
+    //     key={i}
+    //     position={i}
+    //     name={buteuse.name}
+    //     nationality={buteuse.nationality}
+    //     logo={buteuse.number}
+    //   />
+    // )
 
     return (
 
-          <View style={styles.container}>
 
-            <ScrollView>
-              {buteuses}
+            <ScrollView style={styles.container}>
+              <ClassementButeusesContent/>
             </ScrollView>
-          </View>
     );
   };
 };
@@ -114,38 +153,381 @@ class ClassementButeusesContent extends React.Component {
 
   render() {
 
-
-
-    return (
-      <Grid style={styles.row}>
-        <Col style={styles.colLeftClassement}>
-          <Text>
-            {this.props.position + 1}
+    return (<View>
+      <Grid>
+        <Col style={styles.date}>
+          <Text style={styles.eventDate}>
+            Gardiennes de but
           </Text>
         </Col>
-        <Col style={styles.colLogoTeam}>
-          {this.props.logo === 1674 ? <Image style={styles.logoTeam} source={require('../../../public/logo/logo_ol.png')}/> :
-          this.props.logo === 1667 ? <Image style={styles.logoTeam} source={require('../../../public/logo/logo_psg.png')}/> :
-          this.props.logo === 1675 ? <Image style={styles.logoTeam} source={require('../../../public/logo/logo_mhsc.png')}/> :
-          this.props.logo === 1676 ? <Image style={styles.logoTeam} source={require('../../../public/logo/logo_pfc.png')}/> :
-          this.props.logo === 1671 ? <Image style={styles.logoTeam} source={require('../../../public/logo/logo_gbfc.png')}/> :
-          this.props.logo === 1677 ? <Image style={styles.logoTeam} source={require('../../../public/logo/logo_fleury.png')}/> :
-          this.props.logo === 1672 ? <Image style={styles.logoTeam} source={require('../../../public/logo/logo_eag.png')}/> :
-          this.props.logo === 1679 ? <Image style={styles.logoTeam} source={require('../../../public/logo/logo_dfco.png')}/> :
-          this.props.logo === 1669 ? <Image style={styles.logoTeam} source={require('../../../public/logo/logo_asjs.png')}/> :
-          this.props.logo === 1678 ? <Image style={styles.logoTeam} source={require('../../../public/logo/logo_losc.png')}/> :
-          this.props.logo === 1664 ? <Image style={styles.logoTeam} source={require('../../../public/logo/logo_fcm.png')}/> :
-          this.props.logo === 1668 ? <Image style={styles.logoTeam} source={require('../../../public/logo/logo_raf_2017.png')}/> :
-          <Image style={styles.logoTeam} source={require('../../../public/logo/logo_ol.png')}/>}
+      </Grid>
+      <Grid style={styles.row}>
+        <Col style={styles.colLeftClassement}>
+          <Text style={{
+              fontWeight: 'bold'
+            }}>
+            #1
+          </Text>
         </Col>
         <Col style={styles.colNameButeuses}>
-          <Text style={styles.textButeuses}>{this.props.name}</Text>
+          <Text style={styles.textButeuses}>Pauline Benoist</Text>
         </Col>
         <Col style={styles.colIndication}>
-          <Text style={styles.textGoals}>{this.props.nationality}</Text>
+          <Image style={styles.logoTeam} source={require('../../../public/flag-icons/FR.png')}/>
         </Col>
       </Grid>
-    );
+      <Grid style={styles.row}>
+        <Col style={styles.colLeftClassement}>
+          <Text style={{
+              fontWeight: 'bold'
+            }}>
+            #16
+          </Text>
+        </Col>
+        <Col style={styles.colNameButeuses}>
+          <Text style={styles.textButeuses}>Maryne Gignoux-Soulier</Text>
+        </Col>
+        <Col style={styles.colIndication}>
+          <Image style={styles.logoTeam} source={require('../../../public/flag-icons/FR.png')}/>
+        </Col>
+      </Grid>
+      <Grid style={styles.row}>
+        <Col style={styles.colLeftClassement}>
+          <Text style={{
+              fontWeight: 'bold'
+            }}>
+            #30
+          </Text>
+        </Col>
+        <Col style={styles.colNameButeuses}>
+          <Text style={styles.textButeuses}>Blandine Joly</Text>
+        </Col>
+        <Col style={styles.colIndication}>
+          <Image style={styles.logoTeam} source={require('../../../public/flag-icons/FR.png')}/>
+        </Col>
+      </Grid>
+      <Grid>
+        <Col style={styles.date}>
+          <Text style={styles.eventDate}>
+            Défenseuses
+          </Text>
+        </Col>
+      </Grid>
+      <Grid style={styles.row}>
+        <Col style={styles.colLeftClassement}>
+          <Text style={{
+              fontWeight: 'bold'
+            }}>
+            #2
+          </Text>
+        </Col>
+        <Col style={styles.colNameButeuses}>
+          <Text style={styles.textButeuses}>Gwenaëlle Butel</Text>
+        </Col>
+        <Col style={styles.colIndication}>
+          <Image style={styles.logoTeam} source={require('../../../public/flag-icons/FR.png')}/>
+        </Col>
+      </Grid>
+      <Grid style={styles.row}>
+        <Col style={styles.colLeftClassement}>
+          <Text style={{
+              fontWeight: 'bold'
+            }}>
+            #3
+          </Text>
+        </Col>
+        <Col style={styles.colNameButeuses}>
+          <Text style={styles.textButeuses}>Kelly Gadea</Text>
+        </Col>
+        <Col style={styles.colIndication}>
+          <Image style={styles.logoTeam} source={require('../../../public/flag-icons/FR.png')}/>
+        </Col>
+      </Grid>
+      <Grid style={styles.row}>
+        <Col style={styles.colLeftClassement}>
+          <Text style={{
+              fontWeight: 'bold'
+            }}>
+            #4
+          </Text>
+        </Col>
+        <Col style={styles.colNameButeuses}>
+          <Text style={styles.textButeuses}>Marine Haupais</Text>
+        </Col>
+        <Col style={styles.colIndication}>
+          <Image style={styles.logoTeam} source={require('../../../public/flag-icons/FR.png')}/>
+        </Col>
+      </Grid>
+      <Grid style={styles.row}>
+        <Col style={styles.colLeftClassement}>
+          <Text style={{
+              fontWeight: 'bold'
+            }}>
+            #28
+          </Text>
+        </Col>
+        <Col style={styles.colNameButeuses}>
+          <Text style={styles.textButeuses}>Léna Jouan</Text>
+        </Col>
+        <Col style={styles.colIndication}>
+          <Image style={styles.logoTeam} source={require('../../../public/flag-icons/FR.png')}/>
+        </Col>
+      </Grid>
+      <Grid style={styles.row}>
+        <Col style={styles.colLeftClassement}>
+          <Text style={{
+              fontWeight: 'bold'
+            }}>
+            #5
+          </Text>
+        </Col>
+        <Col style={styles.colNameButeuses}>
+          <Text style={styles.textButeuses}>Léonie Multari</Text>
+        </Col>
+        <Col style={styles.colIndication}>
+          <Image style={styles.logoTeam} source={require('../../../public/flag-icons/FR.png')}/>
+        </Col>
+      </Grid>
+      <Grid style={styles.row}>
+        <Col style={styles.colLeftClassement}>
+          <Text style={{
+              fontWeight: 'bold'
+            }}>
+            #26
+          </Text>
+        </Col>
+        <Col style={styles.colNameButeuses}>
+          <Text style={styles.textButeuses}>Mélissa Roy</Text>
+        </Col>
+        <Col style={styles.colIndication}>
+          <Image style={styles.logoTeam} source={require('../../../public/flag-icons/FR.png')}/>
+        </Col>
+      </Grid>
+      <Grid style={styles.row}>
+        <Col style={styles.colLeftClassement}>
+          <Text style={{
+              fontWeight: 'bold'
+            }}>
+            #17
+          </Text>
+        </Col>
+        <Col style={styles.colNameButeuses}>
+          <Text style={styles.textButeuses}>Teninsoun Sissoko</Text>
+        </Col>
+        <Col style={styles.colIndication}>
+          <Image style={styles.logoTeam} source={require('../../../public/flag-icons/FR.png')}/>
+        </Col>
+      </Grid>
+      <Grid>
+        <Col style={styles.date}>
+          <Text style={styles.eventDate}>
+            Milieux de terrain
+          </Text>
+        </Col>
+      </Grid>
+      <Grid style={styles.row}>
+        <Col style={styles.colLeftClassement}>
+          <Text style={{
+              fontWeight: 'bold'
+            }}>
+            #7
+          </Text>
+        </Col>
+        <Col style={styles.colNameButeuses}>
+          <Text style={styles.textButeuses}>Salma Amani</Text>
+        </Col>
+        <Col style={styles.colIndication}>
+          <Image style={styles.logoTeam} source={require('../../../public/flag-icons/FR.png')}/>
+        </Col>
+      </Grid>
+      <Grid style={styles.row}>
+        <Col style={styles.colLeftClassement}>
+          <Text style={{
+              fontWeight: 'bold'
+            }}>
+            #12
+          </Text>
+        </Col>
+        <Col style={styles.colNameButeuses}>
+          <Text style={styles.textButeuses}>Céline Chatelain</Text>
+        </Col>
+        <Col style={styles.colIndication}>
+          <Image style={styles.logoTeam} source={require('../../../public/flag-icons/FR.png')}/>
+        </Col>
+      </Grid>
+      <Grid style={styles.row}>
+        <Col style={styles.colLeftClassement}>
+          <Text style={{
+              fontWeight: 'bold'
+            }}>
+            #6
+          </Text>
+        </Col>
+        <Col style={styles.colNameButeuses}>
+          <Text style={styles.textButeuses}>Aude Moreau</Text>
+        </Col>
+        <Col style={styles.colIndication}>
+          <Image style={styles.logoTeam} source={require('../../../public/flag-icons/FR.png')}/>
+        </Col>
+      </Grid>
+      <Grid style={styles.row}>
+        <Col style={styles.colLeftClassement}>
+          <Text style={{
+              fontWeight: 'bold'
+            }}>
+            #21
+          </Text>
+        </Col>
+        <Col style={styles.colNameButeuses}>
+          <Text style={styles.textButeuses}>Maéva Clémaron</Text>
+        </Col>
+        <Col style={styles.colIndication}>
+          <Image style={styles.logoTeam} source={require('../../../public/flag-icons/FR.png')}/>
+        </Col>
+      </Grid>
+      <Grid style={styles.row}>
+        <Col style={styles.colLeftClassement}>
+          <Text style={{
+              fontWeight: 'bold'
+            }}>
+            #6
+          </Text>
+        </Col>
+        <Col style={styles.colNameButeuses}>
+          <Text style={styles.textButeuses}>Daphné Corboz</Text>
+        </Col>
+        <Col style={styles.colIndication}>
+          <Image style={styles.logoTeam} source={require('../../../public/flag-icons/US.png')}/>
+        </Col>
+      </Grid>
+      <Grid style={styles.row}>
+        <Col style={styles.colLeftClassement}>
+          <Text style={{
+              fontWeight: 'bold'
+            }}>
+            #24
+          </Text>
+        </Col>
+        <Col style={styles.colNameButeuses}>
+          <Text style={styles.textButeuses}>Rachel Corboz</Text>
+        </Col>
+        <Col style={styles.colIndication}>
+          <Image style={styles.logoTeam} source={require('../../../public/flag-icons/US.png')}/>
+        </Col>
+      </Grid>
+      <Grid style={styles.row}>
+        <Col style={styles.colLeftClassement}>
+          <Text style={{
+              fontWeight: 'bold'
+            }}>
+            #13
+          </Text>
+        </Col>
+        <Col style={styles.colNameButeuses}>
+          <Text style={styles.textButeuses}>Charlotte Fernandes</Text>
+        </Col>
+        <Col style={styles.colIndication}>
+          <Image style={styles.logoTeam} source={require('../../../public/flag-icons/FR.png')}/>
+        </Col>
+      </Grid>
+      <Grid>
+        <Col style={styles.date}>
+          <Text style={styles.eventDate}>
+            Attaquantes
+          </Text>
+        </Col>
+      </Grid>
+      <Grid style={styles.row}>
+        <Col style={styles.colLeftClassement}>
+          <Text style={{
+              fontWeight: 'bold'
+            }}>
+            #11
+          </Text>
+        </Col>
+        <Col style={styles.colNameButeuses}>
+          <Text style={styles.textButeuses}>Nadjma Ali Nadjim</Text>
+        </Col>
+        <Col style={styles.colIndication}>
+          <Image style={styles.logoTeam} source={require('../../../public/flag-icons/FR.png')}/>
+        </Col>
+      </Grid>
+      <Grid style={styles.row}>
+        <Col style={styles.colLeftClassement}>
+          <Text style={{
+              fontWeight: 'bold'
+            }}>
+            #14
+          </Text>
+        </Col>
+        <Col style={styles.colNameButeuses}>
+          <Text style={styles.textButeuses}>Danaé Dunord</Text>
+        </Col>
+        <Col style={styles.colIndication}>
+          <Image style={styles.logoTeam} source={require('../../../public/flag-icons/FR.png')}/>
+        </Col>
+      </Grid>
+      <Grid style={styles.row}>
+        <Col style={styles.colLeftClassement}>
+          <Text style={{
+              fontWeight: 'bold'
+            }}>
+            #19
+          </Text>
+        </Col>
+        <Col style={styles.colNameButeuses}>
+          <Text style={styles.textButeuses}>Alexandria Lamontagne</Text>
+        </Col>
+        <Col style={styles.colIndication}>
+          <Image style={styles.logoTeam} source={require('../../../public/flag-icons/CA.png')}/>
+        </Col>
+      </Grid>
+      <Grid style={styles.row}>
+        <Col style={styles.colLeftClassement}>
+          <Text style={{
+              fontWeight: 'bold'
+            }}>
+            #15
+          </Text>
+        </Col>
+        <Col style={styles.colNameButeuses}>
+          <Text style={styles.textButeuses}>Marie-Charlotte Léger</Text>
+        </Col>
+        <Col style={styles.colIndication}>
+          <Image style={styles.logoTeam} source={require('../../../public/flag-icons/FR.png')}/>
+        </Col>
+      </Grid>
+      <Grid style={styles.row}>
+        <Col style={styles.colLeftClassement}>
+          <Text style={{
+              fontWeight: 'bold'
+            }}>
+            #10
+          </Text>
+        </Col>
+        <Col style={styles.colNameButeuses}>
+          <Text style={styles.textButeuses}>Julie Rabanne</Text>
+        </Col>
+        <Col style={styles.colIndication}>
+          <Image style={styles.logoTeam} source={require('../../../public/flag-icons/FR.png')}/>
+        </Col>
+      </Grid>
+      <Grid style={styles.row}>
+        <Col style={styles.colLeftClassement}>
+          <Text style={{
+              fontWeight: 'bold'
+            }}>
+            #9
+          </Text>
+        </Col>
+        <Col style={styles.colNameButeuses}>
+          <Text style={styles.textButeuses}>Sarah Palacin</Text>
+        </Col>
+        <Col style={styles.colIndication}>
+          <Image style={styles.logoTeam} source={require('../../../public/flag-icons/FR.png')}/>
+        </Col>
+      </Grid>
+    </View>);
   };
 };
 
@@ -178,13 +560,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#F6F7EB'
   },
   colLeftClassement: {
-    alignItems: 'center',
+    alignItems: 'flex-end',
     justifyContent: 'center',
-    width: '5%'
+    width: '10%',
+    paddingLeft: "3%",
   },
   colNameButeuses: {
+    paddingLeft: "5%",
     justifyContent: 'center',
-    width: '65%'
+    width: '80%'
   },
   colLogoTeam: {
     alignItems: 'center',
@@ -201,5 +585,20 @@ const styles = StyleSheet.create({
   textGoals: {
     fontSize: 18,
     fontWeight: 'bold'
-  }
+  },
+  date: {
+    marginTop: 8,
+    borderTopWidth: 1,
+    borderColor: '#D3D3D3',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#e5e8ca',
+  },
+  eventDate: {
+    color: '#393E41',
+    height: 20,
+    fontSize: 14,
+    fontWeight: 'bold',
+    marginTop: 8,
+  },
 });
