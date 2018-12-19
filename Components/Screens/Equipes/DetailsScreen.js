@@ -16,19 +16,29 @@ import {connect} from 'react-redux';
 class DetailsScreen extends React.Component {
   constructor(props) {
     super(props);
-    // console.log("props : ", this.props.teamStats.teamId)
+
+
+
     this.state = {
       team_id: this.props.teamStats.teamId,
       matchsGagnes: this.props.teamStats.matchsGagnes,
       matchsNuls: this.props.teamStats.matchsNuls,
       matchsPerdus: this.props.teamStats.matchsPerdus,
       matchsTotaux: this.props.teamStats.matchsTotaux,
+      classement :0,
       matchs:[]
     };
   }
 
 
   componentDidMount() {
+  // console.log("props : ", this.props.teamClassement)
+        for (var z in this.props.teamClassement ){
+          if (this.props.teamClassement[z].teamId == this.props.teamStats.teamId){
+            this.setState({classement : this.props.teamClassement[z].teamStanding})
+
+          }
+        }
     // console.log("matchs gagnés :", this.props.teamStats.matchsGagnes)
     // console.log("matchs nuls :", this.props.teamStats.matchsNuls)
     // console.log("matchs perdus :", this.props.teamStats.matchsPerdus)
@@ -133,12 +143,12 @@ class DetailsScreen extends React.Component {
             <ChartNuls matchsNuls={this.state.matchsNuls} matchsTotaux={this.state.matchsTotaux}  />
             <ChartDefaites matchsPerdus={this.state.matchsPerdus} matchsTotaux={this.state.matchsTotaux}  />
             </View>
-            <View style={styles.fondTitre}>
-              <Text style={styles.titre}>Rang actuel : {"1ère"} du classement</Text>
+            <View style={styles.fondTitreClassement}>
+              <Text style={styles.titreClassement}>Rang actuel : <Text style={{fontSize:20}}> {this.state.classement}</Text>{this.state.classement==1?'ère':'ème'} du classement</Text>
               </View>
               <View style={{
                 flexDirection: 'row',
-                justifyContent: 'space-between',
+                justifyContent: 'space-around',
                 marginVertical: 20
               }}>
               <Text>5 derniers matchs :  </Text>
@@ -158,6 +168,8 @@ const styles = StyleSheet.create({
   },
   fondTitre: {
     marginTop: 8,
+    paddingBottom:4,
+    paddingTop:4,
     borderTopWidth: 1,
     borderColor: '#D3D3D3',
     justifyContent: 'center',
@@ -169,13 +181,31 @@ const styles = StyleSheet.create({
     height: 20,
     fontSize: 14,
     fontWeight: 'bold',
+    marginTop: 0,
+  },
+  fondTitreClassement: {
     marginTop: 8,
+    paddingBottom:4,
+    paddingTop:4,
+    borderTopWidth: 1,
+    borderColor: '#D3D3D3',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#e5e8ca',
+  },
+  titreClassement: {
+    color: '#393E41',
+    height: 30,
+    fontSize: 14,
+    fontWeight: 'bold',
+    marginTop: 0,
   }
 });
 
 function mapStateToProps(state) {
 
   return {
+    teamClassement : state.teamClassement,
     teamStats: state.teamStats,
   };
 }

@@ -43,7 +43,7 @@ import Pie from 'react-native-fab-pie';
         <View
           style={{
             marginVertical: 0,
-            marginHorizontal: 3,
+            marginHorizontal: 0,
             justifyContent: 'center',
             alignItems: 'center',
             flex: 1,
@@ -69,7 +69,7 @@ import Pie from 'react-native-fab-pie';
               flex: 1,
             }}
             outerRadius={10}
-            innerRadius={.1}
+            innerRadius={.01}
             data={this.state.pieData}
             animate
           >

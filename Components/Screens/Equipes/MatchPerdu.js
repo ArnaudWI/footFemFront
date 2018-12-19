@@ -43,7 +43,7 @@ import Pie from 'react-native-fab-pie';
         <View
           style={{
             marginVertical: 0,
-            marginHorizontal: 3,
+            marginHorizontal: 0,
             justifyContent: 'center',
             alignItems: 'center',
             flex: 1,

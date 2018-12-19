@@ -6,8 +6,9 @@ import {ButtonGroup} from 'react-native-elements';
 import HeaderScreen from '../Screens/HeaderScreen';
 import MatchScreen from '../Screens/MatchScreen';
 
+import {connect} from 'react-redux';
 
-export default class RencontresScreen extends React.Component {
+class RencontresScreen extends React.Component {
   constructor() {
     super();
     this.state={
@@ -28,6 +29,12 @@ export default class RencontresScreen extends React.Component {
       });
   }
 
+goToMatch =(fixtureId) => {
+  //récupération des stats
+    this.props.matchSubmit(fixtureId);
+    this.props.navigation.navigate('Match');
+  }
+
   render() {
 
     var dataMatch = Object.keys(this.state.journee)
@@ -36,6 +43,8 @@ export default class RencontresScreen extends React.Component {
         navigation={this.props.navigation}
         key={i}
         position={i}
+        fixtureId={this.state.journee[resultat].fixture_id}
+        getMatch={this.goToMatch}
         homeTeam={this.state.journee[resultat].homeTeam}
         elapsed={this.state.journee[resultat].elapsed}
         goalsHomeTeam={this.state.journee[resultat].goalsHomeTeam}
@@ -96,7 +105,7 @@ class Rencontres extends React.Component {
       <Grid style={styles.match}>
           <Col>
           </Col>
-          <Col onPress={ ()=> this.props.navigation.navigate('Match')} style={styles.colRencontres}>
+          <Col onPress={()=>this.props.getMatch(this.props.fixtureId)} style={styles.colRencontres}>
             <Col style={styles.colTeam}>
               <Text style={styles.homeTeamTitle}>{this.props.homeTeam.slice(0, -2)}</Text>
             </Col>
@@ -278,3 +287,16 @@ const styles = StyleSheet.create({
     width: 25
   },
 });
+
+function mapDispatchToProps(dispatch) {
+  return {
+    matchSubmit: function(fixture) {
+      dispatch({
+        type: 'setFixtureId',
+        fixtureId: fixture,
+      });
+    },
+  }
+};
+
+export default connect(null, mapDispatchToProps)(RencontresScreen);

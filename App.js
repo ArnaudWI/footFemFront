@@ -7,12 +7,13 @@ import Navigation from './Components/Navigation/Navigation';
 import teamStats from './Components/Reducers/stats.reducer'
 import teamClassement from './Components/Reducers/classement.reducer'
 import addFavoris from './Components/Reducers/favoris.reducer'
+import match from './Components/Reducers/match.reducer'
 // import de mes outils Redux
 import {Provider} from 'react-redux';
 import {createStore, combineReducers} from 'redux';
 
 // Création de mon Store
-const store = createStore(combineReducers({teamStats, teamClassement, addFavoris}));
+const store = createStore(combineReducers({teamStats, teamClassement, addFavoris, match}));
 
 export default class App extends React.Component {
   render() {
