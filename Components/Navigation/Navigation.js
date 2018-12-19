@@ -58,6 +58,7 @@ var StackNavigator = createStackNavigator({
   MainBottomNavigator: MainBottomNavigator,
   StatsScreensList : StatsScreensList,
   Match : MatchScreen,
+  JourneePrededant: MatchScreen
   // MainTopNavigator: MainTopNavigator
 }, {headerMode: 'none'})
 
