@@ -89,9 +89,10 @@ componentDidMount() {
     });
 
     return (
-
+          <View style={styles.container}>
+            <HeaderScreen title={"Equipes"}/>
             <ScrollView>
-              <HeaderScreen title={"Equipes"}/>
+
               {/* {
                 this.state.fontLoaded ? ( */}
 
@@ -104,7 +105,7 @@ componentDidMount() {
 
 
             </ScrollView>
-
+          </View>
     );
   };
 };
@@ -149,7 +150,7 @@ componentDidMount() {
                 style={styles.team}>{this.props.teamName.slice(0, -2)}</Text>
             </Col>
             <Col style={styles.colStar}>
-              
+
               {/* backgroundColor: 'yellow' */}
               {/* <Icon icon="star" style={styles.teamIcon} /> */}
             </Col>

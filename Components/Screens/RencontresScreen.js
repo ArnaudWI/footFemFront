@@ -85,7 +85,7 @@ class RencontresScreen extends React.Component {
       <ScrollView>
         <View style={styles.date}>
           <Text style={styles.eventDate}>
-            salut
+            Samedi 15 Janvier
           </Text>
 
         </View>
@@ -120,7 +120,7 @@ class Journee extends React.Component {
         <Col style={{alignItems: 'center', justifyContent: 'center'}}>
 
 
-          <Text style={{color: '#dddddd', fontWeight: 'bold', fontSize: 16}}>{this.props.round} Journée</Text>
+          <Text style={{color: '#dddddd', fontWeight: 'bold', fontSize: 16}}>Journée {this.props.round}</Text>
         </Col>
         <Col onPress={ ()=> this.props.refreshJournee(+1)} style={{alignItems: 'center'}}>
           <Ionicons name="md-arrow-dropright" size={26} color="#dddddd" />
@@ -257,6 +257,7 @@ const styles = StyleSheet.create({
     color: '#393E41',
     fontSize: 14,
     fontWeight: 'bold',
+    textAlign: 'right',
   },
   awayTeamTitle: {
     color: '#393E41',
@@ -282,20 +283,20 @@ const styles = StyleSheet.create({
   },
   colTeam: {
     flexDirection: 'row',
-    width: '34%',
+    width: '33%',
 
   },
   colLogo: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '12%',
+    width: '10%',
     margin: 5,
   },
   colScore: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: '20%',
+    width: '23%',
   },
   date: {
     marginTop: 8,

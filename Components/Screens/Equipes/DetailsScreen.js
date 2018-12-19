@@ -11,40 +11,32 @@ import MatchGagne from './MatchGagne';
 import MatchPerdu from './MatchPerdu';
 import MatchNul from './MatchNul';
 
+
+
+
 import {connect} from 'react-redux';
 
 class DetailsScreen extends React.Component {
   constructor(props) {
     super(props);
-
-
-
     this.state = {
       team_id: this.props.teamStats.teamId,
       matchsGagnes: this.props.teamStats.matchsGagnes,
       matchsNuls: this.props.teamStats.matchsNuls,
       matchsPerdus: this.props.teamStats.matchsPerdus,
       matchsTotaux: this.props.teamStats.matchsTotaux,
-      classement :0,
       matchs:[]
     };
   }
 
 
   componentDidMount() {
-  // console.log("props : ", this.props.teamClassement)
-        for (var z in this.props.teamClassement ){
-          if (this.props.teamClassement[z].teamId == this.props.teamStats.teamId){
-            this.setState({classement : this.props.teamClassement[z].teamStanding})
-
-          }
-        }
     // console.log("matchs gagnés :", this.props.teamStats.matchsGagnes)
     // console.log("matchs nuls :", this.props.teamStats.matchsNuls)
     // console.log("matchs perdus :", this.props.teamStats.matchsPerdus)
     // console.log("matchs matchsTotaux :", this.props.teamStats.matchsTotaux)
 
-    var teamApi_id = this.props.teamStats.teamId;
+    var teamApi_id = 1664;
     //récupération des 5 derniers résultats
     var ts = Date.now() / 1000;
     fetch(`https://footfembackend.herokuapp.com/fixtures/team/${teamApi_id}`)
@@ -59,7 +51,7 @@ class DetailsScreen extends React.Component {
         final_score : e.final_score
       }
     });
-
+    console.log("matchsTab : ", matchsTab)
     for (z in matchsTab) {
     // console.log(z);
     if (matchsTab[z].diffTemps > 0) {
@@ -113,8 +105,8 @@ class DetailsScreen extends React.Component {
     console.log("a partir d'ici, log de la page DETAILS /////////////////////////////////////////")
     // console.log(this.state.matchs[0].gnp)
       var badgeMatch = this.state.matchs.map((e,i) => {
-        // console.log ("coucou")
-        // console.log("e.gnp : ", e.gnp)
+        console.log ("coucou")
+        console.log("e.gnp : ", e.gnp)
         if (e.gnp=="gagne"){
           return <MatchGagne key={i} />
         }else if (e.gnp=="perdu"){
@@ -143,13 +135,13 @@ class DetailsScreen extends React.Component {
             <ChartNuls matchsNuls={this.state.matchsNuls} matchsTotaux={this.state.matchsTotaux}  />
             <ChartDefaites matchsPerdus={this.state.matchsPerdus} matchsTotaux={this.state.matchsTotaux}  />
             </View>
-            <View style={styles.fondTitreClassement}>
-              <Text style={styles.titreClassement}>Rang actuel : <Text style={{fontSize:20}}> {this.state.classement}</Text>{this.state.classement==1?'ère':'ème'} du classement</Text>
+            <View style={styles.fondTitre}>
+              <Text style={styles.titre}>Rang actuel : {"1ère"} du classement</Text>
               </View>
               <View style={{
                 flexDirection: 'row',
-                justifyContent: 'space-around',
-                marginVertical: 20
+                justifyContent: 'space-between',
+                height: 80,
               }}>
               <Text>5 derniers matchs :  </Text>
               {badgeMatch}
@@ -168,8 +160,6 @@ const styles = StyleSheet.create({
   },
   fondTitre: {
     marginTop: 8,
-    paddingBottom:4,
-    paddingTop:4,
     borderTopWidth: 1,
     borderColor: '#D3D3D3',
     justifyContent: 'center',
@@ -181,31 +171,13 @@ const styles = StyleSheet.create({
     height: 20,
     fontSize: 14,
     fontWeight: 'bold',
-    marginTop: 0,
-  },
-  fondTitreClassement: {
     marginTop: 8,
-    paddingBottom:4,
-    paddingTop:4,
-    borderTopWidth: 1,
-    borderColor: '#D3D3D3',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#e5e8ca',
-  },
-  titreClassement: {
-    color: '#393E41',
-    height: 30,
-    fontSize: 14,
-    fontWeight: 'bold',
-    marginTop: 0,
   }
 });
 
 function mapStateToProps(state) {
 
   return {
-    teamClassement : state.teamClassement,
     teamStats: state.teamStats,
   };
 }
