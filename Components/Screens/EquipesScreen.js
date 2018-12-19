@@ -17,7 +17,6 @@ class EquipesScreen extends React.Component {
     super()
     this.state = {
       teams: {},
-      teamId: 1664,
     }
   }
 
@@ -124,7 +123,8 @@ componentDidMount() {
         //   <Icon icon="star" style={styles.teamIcon} />
         // </View>
 
-          <Grid>
+          <Grid onPress={() => this.props.getStats(parseInt(this.props.id), this.props.teamName.slice(0, -2))}>
+
             <Col style={styles.colImage}>
               {/* <Image style={styles.image} source={{ uri: 'http://www.statsfootofeminin.fr/img/logo_'+this.props.teamImg+'.png' }} /> */}
               {
@@ -145,14 +145,15 @@ componentDidMount() {
             </Col>
             <Col style={styles.colTeam}>
               <Text
-                onPress={() => this.props.getStats(parseInt(this.props.id), this.props.teamName.slice(0, -2))}
+
                 style={styles.team}>{this.props.teamName.slice(0, -2)}</Text>
             </Col>
             <Col style={styles.colStar}>
-              <Icon onPress={() => this.setState({star: !this.state.star})} name= {this.state.star ? "md-star" : "md-star-outline"} style= {this.state.star ? {color:"#FAC05E"} : {color:"#393E41"}}/>
+              
               {/* backgroundColor: 'yellow' */}
               {/* <Icon icon="star" style={styles.teamIcon} /> */}
             </Col>
+
           </Grid>
       );
     };
