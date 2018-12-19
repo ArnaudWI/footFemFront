@@ -9,17 +9,35 @@ import MatchScreen from '../Screens/MatchScreen';
 import {connect} from 'react-redux';
 
 
+
 class RencontresScreen extends React.Component {
   constructor() {
     super();
     this.state={
-  journee: {},
-  round: null,
-};
+      journee: {},
+      round: null,
+    };
   }
 
   componentDidMount() {
     fetch('https://footfembackend.herokuapp.com/journee')
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          journee: data.matchs,
+          round: data.round
+        })
+        console.log(data.round)
+      });
+  }
+
+  refreshJournee = (value) => {
+    console.log(this.state.round);
+    var journee= Number(this.state.round)+value
+    this.setState({
+      round: journee
+    })
+    fetch('https://footfembackend.herokuapp.com/journee/'+journee)
       .then(response => response.json())
       .then(data => {
         this.setState({
@@ -63,7 +81,7 @@ class RencontresScreen extends React.Component {
 
     return (<View style={styles.container}>
       <HeaderScreen title={'Rencontres'}/>
-        <Journee round={this.state.round}/>
+        <Journee round={this.state.round} refreshJournee={this.refreshJournee}/>
       <ScrollView>
         <View style={styles.date}>
           <Text style={styles.eventDate}>
@@ -88,11 +106,13 @@ class RencontresScreen extends React.Component {
 // };
 
 class Journee extends React.Component {
+
+
   render() {
     return (
       <View  style={styles.journee}>
       <Grid>
-        <Col onPress={ ()=> this.props.navigation.navigate('JourneePrededant')} style={{alignItems: 'center'}}>
+        <Col onPress={ ()=> this.props.refreshJournee(-1)} style={{alignItems: 'center'}}>
 
             <Ionicons name="md-arrow-dropleft" size={26} color="#dddddd" />
 
@@ -102,7 +122,7 @@ class Journee extends React.Component {
 
           <Text style={{color: '#dddddd', fontWeight: 'bold', fontSize: 16}}>{this.props.round} Journée</Text>
         </Col>
-        <Col style={{alignItems: 'center'}}>
+        <Col onPress={ ()=> this.props.refreshJournee(+1)} style={{alignItems: 'center'}}>
           <Ionicons name="md-arrow-dropright" size={26} color="#dddddd" />
         </Col>
       </Grid>
