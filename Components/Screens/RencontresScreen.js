@@ -8,10 +8,7 @@ import MatchScreen from '../Screens/MatchScreen';
 
 import {connect} from 'react-redux';
 
-<<<<<<< HEAD
 
-=======
->>>>>>> equipes
 class RencontresScreen extends React.Component {
   constructor() {
     super();
@@ -33,19 +30,11 @@ class RencontresScreen extends React.Component {
       });
   }
 
-<<<<<<< HEAD
   goToMatch =(fixtureId) => {
     //récupération des stats
       this.props.matchSubmit(fixtureId);
       this.props.navigation.navigate('Match');
     }
-=======
-goToMatch =(fixtureId) => {
-  //récupération des stats
-    this.props.matchSubmit(fixtureId);
-    this.props.navigation.navigate('Match');
-  }
->>>>>>> equipes
 
   render() {
 
@@ -57,8 +46,6 @@ goToMatch =(fixtureId) => {
         navigation={this.props.navigation}
         key={i}
         position={i}
-        fixtureId={this.state.journee[resultat].fixture_id}
-        getMatch={this.goToMatch}
         homeTeam={this.state.journee[resultat].homeTeam}
         elapsed={this.state.journee[resultat].elapsed}
         goalsHomeTeam={this.state.journee[resultat].goalsHomeTeam}
@@ -327,16 +314,3 @@ const styles = StyleSheet.create({
     width: 25
   },
 });
-
-function mapDispatchToProps(dispatch) {
-  return {
-    matchSubmit: function(fixture) {
-      dispatch({
-        type: 'setFixtureId',
-        fixtureId: fixture,
-      });
-    },
-  }
-};
-
-export default connect(null, mapDispatchToProps)(RencontresScreen);
