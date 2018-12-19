@@ -120,7 +120,7 @@ class Rencontres extends React.Component {
           </Col>
           <Col onPress={()=>this.props.getMatch(this.props.fixtureId)} style={styles.colRencontres}>
             <Col style={styles.colTeam}>
-              <View flex right>
+              <View>
                 <Text style={styles.homeTeamTitle}>{this.props.homeTeam.slice(0, -2)}</Text>
               </View>
             </Col>
