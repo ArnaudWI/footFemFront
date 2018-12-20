@@ -7,136 +7,136 @@ export default class EffectifsScreen extends React.Component {
 
   render() {
 
-    // var players = [
-    //   {
-    //     name: "Pauline Benoist",
-    //     nationality: '../../public/flag-icons/FR.png',
-    //     number: 1
-    //   },
-    //   {
-    //     name: "Maryne Gignoux-Soulier",
-    //     nationality: '../../public/flag-icons/FR.png',
-    //     number: 16
-    //   },
-    //   {
-    //     name: "Blandine Joly",
-    //     nationality: '../../public/flag-icons/FR.png',
-    //     number: 30
-    //   },
-    //   {
-    //     name: "Gwenaëlle Butel",
-    //     nationality: '../../public/flag-icons/FR.png',
-    //     number: 2
-    //   },
-    //   {
-    //     name: "Kelly Gadea",
-    //     nationality: '../../public/flag-icons/FR.png',
-    //     number: 3
-    //   },
-    //   {
-    //     name: "Marine Haupais",
-    //     nationality: '../../public/flag-icons/FR.png',
-    //     number: 4
-    //   },
-    //   {
-    //     name: "Léna Jouan",
-    //     nationality: '../../public/flag-icons/FR.png',
-    //     number: 28
-    //   },
-    //   {
-    //     name: "Léonie Multari",
-    //     nationality: '../../public/flag-icons/FR.png',
-    //     number: 5
-    //   },
-    //   {
-    //     name: "Mélissa Roy",
-    //     nationality: '../../public/flag-icons/FR.png',
-    //     number: 26
-    //   },
-    //   {
-    //     name: "Teninsoun Sissoko",
-    //     nationality: '../../public/flag-icons/FR.png',
-    //     number: 17
-    //   },
-    //   {
-    //     name: "Salma Amani",
-    //     nationality: '../../public/flag-icons/FR.png',
-    //     number: 7
-    //   },
-    //   {
-    //     name: "Céline Chatelain",
-    //     nationality: '../../public/flag-icons/FR.png',
-    //     number: 12
-    //   },
-    //   {
-    //     name: "Aude Moreau",
-    //     nationality: '../../public/flag-icons/FR.png',
-    //     number: 6
-    //   },
-    //   {
-    //     name: "Maéva Clémaron",
-    //     nationality: '../../public/flag-icons/FR.png',
-    //     number: 21
-    //   },
-    //   {
-    //     name: "Daphné Corboz",
-    //     nationality: '../../public/flag-icons/US.png',
-    //     number: 8
-    //   },
-    //   {
-    //     name: "Rachel Corboz",
-    //     nationality: '../../../public/flag-icons/US.png',
-    //     number: 24
-    //   },
-    //   {
-    //     name: "Charlotte Fernandes",
-    //     nationality: '../../public/flag-icons/FR.png',
-    //     number: 13
-    //   },
-    //   {
-    //     name: "Nadjma Ali Nadjim",
-    //     nationality: '../../public/flag-icons/FR.png',
-    //     number: 11
-    //   },
-    //   {
-    //     name: "Danaé Dunord",
-    //     nationality: '../../public/flag-icons/FR.png',
-    //     number: 14
-    //   },
-    //   {
-    //     name: "Alexandria Lamontagne",
-    //     nationality: '../../public/flag-icons/FR.png',
-    //     number: 19
-    //   },
-    //   {
-    //     name: "Marie-Charlotte Léger",
-    //     nationality: '../../public/flag-icons/FR.png',
-    //     number: 15
-    //   },
-    //   {
-    //     name: "Julie Rabanne",
-    //     nationality: '../../public/flag-icons/FR.png',
-    //     number: 10
-    //   },
-    //   {
-    //     name: "Sarah Palacin",
-    //     nationality: '../../public/flag-icons/FR.png',
-    //     number: 9
-    //   },
-    //
-    // ]
-    //
-    //
-    // var buteuses = players.map((buteuse, i) =>
-    //
-    //   <ClassementButeusesContent
-    //     key={i}
-    //     position={i}
-    //     name={buteuse.name}
-    //     nationality={buteuse.nationality}
-    //     logo={buteuse.number}
-    //   />
-    // )
+    var players = [
+      {
+        name: "Pauline Benoist",
+        nationality: '../../public/flag-icons/FR.png',
+        number: 1
+      },
+      {
+        name: "Maryne Gignoux-Soulier",
+        nationality: '../../public/flag-icons/FR.png',
+        number: 16
+      },
+      {
+        name: "Blandine Joly",
+        nationality: '../../public/flag-icons/FR.png',
+        number: 30
+      },
+      {
+        name: "Gwenaëlle Butel",
+        nationality: '../../public/flag-icons/FR.png',
+        number: 2
+      },
+      {
+        name: "Kelly Gadea",
+        nationality: '../../public/flag-icons/FR.png',
+        number: 3
+      },
+      {
+        name: "Marine Haupais",
+        nationality: '../../public/flag-icons/FR.png',
+        number: 4
+      },
+      {
+        name: "Léna Jouan",
+        nationality: '../../public/flag-icons/FR.png',
+        number: 28
+      },
+      {
+        name: "Léonie Multari",
+        nationality: '../../public/flag-icons/FR.png',
+        number: 5
+      },
+      {
+        name: "Mélissa Roy",
+        nationality: '../../public/flag-icons/FR.png',
+        number: 26
+      },
+      {
+        name: "Teninsoun Sissoko",
+        nationality: '../../public/flag-icons/FR.png',
+        number: 17
+      },
+      {
+        name: "Salma Amani",
+        nationality: '../../public/flag-icons/FR.png',
+        number: 7
+      },
+      {
+        name: "Céline Chatelain",
+        nationality: '../../public/flag-icons/FR.png',
+        number: 12
+      },
+      {
+        name: "Aude Moreau",
+        nationality: '../../public/flag-icons/FR.png',
+        number: 6
+      },
+      {
+        name: "Maéva Clémaron",
+        nationality: '../../public/flag-icons/FR.png',
+        number: 21
+      },
+      {
+        name: "Daphné Corboz",
+        nationality: '../../public/flag-icons/US.png',
+        number: 8
+      },
+      {
+        name: "Rachel Corboz",
+        nationality: '../../../public/flag-icons/US.png',
+        number: 24
+      },
+      {
+        name: "Charlotte Fernandes",
+        nationality: '../../public/flag-icons/FR.png',
+        number: 13
+      },
+      {
+        name: "Nadjma Ali Nadjim",
+        nationality: '../../public/flag-icons/FR.png',
+        number: 11
+      },
+      {
+        name: "Danaé Dunord",
+        nationality: '../../public/flag-icons/FR.png',
+        number: 14
+      },
+      {
+        name: "Alexandria Lamontagne",
+        nationality: '../../public/flag-icons/FR.png',
+        number: 19
+      },
+      {
+        name: "Marie-Charlotte Léger",
+        nationality: '../../public/flag-icons/FR.png',
+        number: 15
+      },
+      {
+        name: "Julie Rabanne",
+        nationality: '../../public/flag-icons/FR.png',
+        number: 10
+      },
+      {
+        name: "Sarah Palacin",
+        nationality: '../../public/flag-icons/FR.png',
+        number: 9
+      },
+
+    ]
+
+
+    var buteuses = players.map((buteuse, i) =>
+
+      <ClassementButeusesContent
+        key={i}
+        position={i}
+        name={buteuse.name}
+        nationality={buteuse.nationality}
+        logo={buteuse.number}
+      />
+    )
 
     return (
 
