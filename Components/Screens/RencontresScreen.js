@@ -3,6 +3,7 @@ import {View, Text, StyleSheet, ScrollView, Image, List, ListItem, Switch, Heade
 import {Ionicons, MatterialCommunityIcons} from '@expo/vector-icons';
 import {Col, Row, Grid} from 'react-native-easy-grid';
 import {ButtonGroup} from 'react-native-elements';
+import {Spinner} from 'native-base';
 import HeaderScreen from '../Screens/HeaderScreen';
 import MatchScreen from '../Screens/MatchScreen';
 
@@ -16,6 +17,7 @@ class RencontresScreen extends React.Component {
     this.state={
       journee: {},
       round: null,
+      loading: true,
     };
   }
 
@@ -27,8 +29,17 @@ class RencontresScreen extends React.Component {
           journee: data.matchs,
           round: data.round
         })
-        console.log(data.round)
       });
+
+      fetch('https://footfembackend.herokuapp.com/standings/')
+        .then(response => response.json())
+        .then(data => {
+          this.setState({standings : data.classement})
+          var classTab= Object.values(data.classement);
+          var classReduce = classTab.map((team, i) => {
+            this.props.ClassementTeam(team.team_id, i + 1)
+          })
+        });
   }
 
   refreshJournee = (value) => {
@@ -57,30 +68,44 @@ class RencontresScreen extends React.Component {
   render() {
 
     var dataMatch = Object.keys(this.state.journee)
-    var match = dataMatch.map((resultat, i) =>
-      <Rencontres
-        fixtureId={this.state.journee[resultat].fixture_id}
-        getMatch={this.goToMatch}
-        navigation={this.props.navigation}
-        key={i}
-        position={i}
-        homeTeam={this.state.journee[resultat].homeTeam}
-        elapsed={this.state.journee[resultat].elapsed}
-        goalsHomeTeam={this.state.journee[resultat].goalsHomeTeam}
-        awayTeam={this.state.journee[resultat].awayTeam}
-        halftime_score={this.state.journee[resultat].halftime_score}
-        goalsAwayTeam={this.state.journee[resultat].goalsAwayTeam}
-        status={this.state.journee[resultat].status}
-        event_date={this.state.journee[resultat].event_date}
-        logoHomeTeam={this.state.journee[resultat].homeTeam_id}
-        logoAwayTeam={this.state.journee[resultat].awayTeam_id}
-        round={this.state.journee[resultat].round}
+    var match = dataMatch.map((resultat, i) => {
+      if (i === resultat.length) {
+        this.state.loading = false
+      }
+      return  <Rencontres
+          fixtureId={this.state.journee[resultat].fixture_id}
+          getMatch={this.goToMatch}
+          navigation={this.props.navigation}
+          key={i}
+          position={i}
+          homeTeam={this.state.journee[resultat].homeTeam}
+          elapsed={this.state.journee[resultat].elapsed}
+          goalsHomeTeam={this.state.journee[resultat].goalsHomeTeam}
+          awayTeam={this.state.journee[resultat].awayTeam}
+          halftime_score={this.state.journee[resultat].halftime_score}
+          goalsAwayTeam={this.state.journee[resultat].goalsAwayTeam}
+          status={this.state.journee[resultat].status}
+          event_date={this.state.journee[resultat].event_date}
+          logoHomeTeam={this.state.journee[resultat].homeTeam_id}
+          logoAwayTeam={this.state.journee[resultat].awayTeam_id}
+          round={this.state.journee[resultat].round}
 
-      />
-    )
+        />
+    });
 
-    return (<View style={styles.container}>
-      <HeaderScreen title={'Rencontres'}/>
+
+    if (this.state.loading) {
+      return (<View style={{
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: 'white',
+          flex: 1
+        }}>
+        <Spinner color='#000'/>
+      </View>);
+    } else {
+      return (<View style={styles.container}>
+        <HeaderScreen title={'Rencontres'}/>
         <Journee round={this.state.round} refreshJournee={this.refreshJournee}/>
       <ScrollView>
         {/* <View style={styles.date}>
@@ -91,10 +116,12 @@ class RencontresScreen extends React.Component {
         </View> */}
         {match}
 
-      </ScrollView>
-    </View>);
+        </ScrollView>
+      </View>);
+    };
   };
-};
+}
+
 
 //
 // var testNum({this.props.round}) {
@@ -120,7 +147,7 @@ class Journee extends React.Component {
         <Col style={{alignItems: 'center', justifyContent: 'center'}}>
 
 
-          <Text style={{color: '#dddddd', fontWeight: 'bold', fontSize: 16}}>Journée {this.props.round}</Text>
+          <Text style={{color: '#dddddd', fontWeight: 'bold', fontSize: 16}}>{this.props.round}{this.props.round==1?'ère':'ème'} Journée</Text>
         </Col>
         <Col onPress={ ()=> this.props.refreshJournee(+1)} style={{alignItems: 'center'}}>
           <Ionicons name="md-arrow-dropright" size={26} color="#dddddd" />
@@ -187,7 +214,7 @@ class Rencontres extends React.Component {
                   this.props.status === 'Kick Off' ? <Text style={styles.liveTime}>Live {this.props.elapsed}'</Text> :
 
                   this.props.halftime_score === '-' ? <Text></Text> :
-                  <Text>({this.props.halftime_score})</Text>
+                  <Text>{this.props.halftime_score}</Text>
                 }
               </Text>
             </Col>
@@ -228,6 +255,13 @@ function mapDispatchToProps(dispatch) {
         fixtureId: fixture,
       });
     },
+    ClassementTeam: function(teamId, teamStanding) {
+      dispatch({
+        type: 'setStandingData',
+        teamId: teamId,
+        teamStanding: teamStanding
+      });
+    },
   }
 };
 
@@ -238,14 +272,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F6F7EB'
-  },
-  header: {
-    height: 80,
-    backgroundColor: '#4B85EA',
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center'
   },
   toggleSwitch: {
     width: '20%',
@@ -263,6 +289,7 @@ const styles = StyleSheet.create({
     color: '#393E41',
     fontSize: 14,
     fontWeight: 'bold',
+    textAlign: 'left'
   },
   match: {
     borderBottomWidth: 1,
@@ -282,9 +309,7 @@ const styles = StyleSheet.create({
     width: '83%',
   },
   colTeam: {
-    flexDirection: 'row',
     width: '33%',
-
   },
   colLogo: {
     flexDirection: 'row',
