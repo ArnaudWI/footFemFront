@@ -1,5 +1,4 @@
 export default function (idList = [], action) {
-  console.log("reducer favoris idList :", action);
   if (action.type === 'addFavoris') {
     var idListCopy =  [...idList];
     //pour tous les éléments de listCopy

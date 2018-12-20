@@ -12,7 +12,6 @@ import match from './Components/Reducers/match.reducer'
 // import de mes outils Redux
 import {Provider} from 'react-redux';
 import {createStore, combineReducers} from 'redux';
-
 // Création de mon Store
 const store = createStore(combineReducers({teamStats, teamClassement, favoris, match, goNotif}));
 

@@ -26,7 +26,8 @@ class GeneralScreen extends React.Component {
         this.setState({standings : data.classement})
         var classTab= Object.values(data.classement);
         var classReduce = classTab.map((team, i) => {
-          this.props.ClassementTeam(team.team_id, i + 1)
+        this.props.ClassementTeam(team.team_id, i + 1)
+
         })
       });
   }
@@ -37,8 +38,17 @@ class GeneralScreen extends React.Component {
 
     var classement = dataTableau.map((team, i) => {
       if (i === team.length) {
-        this. state.loading = false
+        this.state.loading = false
       }
+      var follow = false;
+      for (var z in this.props.favoris) {
+        if (this.state.standings[team].team_id == this.props.favoris[z]) {
+          follow = true;
+        } else if (this.state.standings[team].team_id != this.props.favoris[z]) {
+          follow = false;
+        };
+      };
+      console.log(follow)
     return  <ClassementGeneralContent
         key={i}
         position={i}
@@ -50,6 +60,7 @@ class GeneralScreen extends React.Component {
         play={this.state.standings[team].play}
         points={this.state.standings[team].points}
         logo={this.state.standings[team].team_id}
+        follow={follow}
       />
   });
 
@@ -108,9 +119,7 @@ class ClassementGeneralIndication extends React.Component {
 class ClassementGeneralContent extends React.Component {
 
   render() {
-
-
-
+    console.log('dans le composant ClassementGeneralContent\n', this.props.follow ? styles.textIndicationFollow : styles.textIndication);
     return (
           <Grid style={styles.row}>
             <Col style={styles.colLeftClassement}>
@@ -145,7 +154,7 @@ class ClassementGeneralContent extends React.Component {
               <Image style={styles.logoTeam} source={require('../../../public/logo/logo_ol.png')}/>}
             </Col>
             <Col style={styles.colNameTeam}>
-              <Text style={styles.textIndication} style={{fontWeight:'bold'}}>{this.props.teamName.slice(0, -2)}</Text>
+              <Text style={this.props.follow ? styles.textIndicationFollow : styles.textIndicationBold}>{this.props.teamName.slice(0, -2)}</Text>
             </Col>
             <Col style={styles.colIndication}>
               <Text style={styles.textIndication}>{this.props.play}</Text>
@@ -163,7 +172,7 @@ class ClassementGeneralContent extends React.Component {
               <Text style={styles.textIndication}>{this.props.goalsDiff}</Text>
             </Col>
             <Col style={styles.colIndication}>
-              <Text style={styles.textIndication} style={{fontWeight:'bold'}}>{this.props.points}</Text>
+              <Text style={styles.textIndicationBold}>{this.props.points}</Text>
             </Col>
           </Grid>
     );
@@ -240,7 +249,16 @@ const styles = StyleSheet.create({
     width: 20
   },
   textIndication: {
-    fontSize: 10
+    fontSize: 10,
+  },
+  textIndicationBold: {
+    fontSize: 12,
+    fontWeight:'bold'
+  },
+  textIndicationFollow: {
+    fontSize: 12,
+    color: 'red',
+    fontWeight:'bold'
   },
   colLegende: {
     alignItems: 'center',
@@ -263,4 +281,10 @@ function mapDispatchToProps(dispatch) {
   }
 };
 
-export default connect(null, mapDispatchToProps)(GeneralScreen);
+function mapStateToProps(state) {
+  return {
+    favoris: state.favoris,
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(GeneralScreen);
