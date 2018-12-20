@@ -3,7 +3,7 @@ import {View, Text, StyleSheet, ScrollView, Image} from 'react-native';
 import { Col, Row, Grid} from 'react-native-easy-grid';
 import {Ionicons, MatterialCommunityIcons} from '@expo/vector-icons';
 import {connect} from 'react-redux';
-import { Container, Header, Content, Spinner } from 'native-base';
+import { Container, Spinner } from 'native-base';
 
 class GeneralScreen extends React.Component {
   constructor(props) {
@@ -37,7 +37,7 @@ class GeneralScreen extends React.Component {
 
     var classement = dataTableau.map((team, i) => {
       if (i === team.length) {
-        this.state.loading = false
+        this. state.loading = false
       }
     return  <ClassementGeneralContent
         key={i}
@@ -51,8 +51,7 @@ class GeneralScreen extends React.Component {
         points={this.state.standings[team].points}
         logo={this.state.standings[team].team_id}
       />
-
-  })
+  });
 
   if (this.state.loading) {
     return (
