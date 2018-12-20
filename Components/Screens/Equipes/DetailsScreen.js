@@ -150,18 +150,72 @@ class DetailsScreen extends React.Component {
             </View>
             <View style={styles.fondTitreClassement}>
               <Text style={styles.titreClassement}>Rang actuel : <Text style={{fontSize:20}}> {this.state.classement}</Text>{this.state.classement==1?'ère':'ème'} du classement</Text>
-              </View>
-              <View style={{
+            </View>
+
+            <Grid style={{
+              flexDirection: 'row',
+              height: 70,
+              borderBottomWitdh: 1,
+              borderColor: '#D3D3D3',
+              alignItems: 'center',
+              }}>
+              <Col style={{
+                width: '45%',
+                flexDirection: 'row',
+                justifyContent:'center',
+                alignItems: 'center',
+                }}>
+                <Text>5 derniers matchs :  </Text>
+              </Col>
+              <Col style={{
+                width: '50%',
                 flexDirection: 'row',
                 justifyContent: 'space-around',
-                marginVertical: 20
               }}>
-              <Text>5 derniers matchs :  </Text>
-              {badgeMatch}
+                {badgeMatch}
+              </Col>
+
+            </Grid>
+            <View style={styles.fondTitre}>
+              <Text style={styles.titre}>Maillots</Text>
+            </View>
+            <View style={{flexDirection: 'row', justifyContent: 'space-around',}}>
+              <View>
+              {
+              this.props.teamStats.teamId === 1667 ? <Image style={styles.jersey} source={require('../../../public/jerseys/1667-207-home.png')}/> :
+              this.props.teamStats.teamId === 1671 ? <Image style={styles.jersey} source={require('../../../public/jerseys/1671-207-home.png')}/> :
+              this.props.teamStats.teamId === 1672 ? <Image style={styles.jersey} source={require('../../../public/jerseys/1672-207-home.png')}/> :
+              this.props.teamStats.teamId === 1674 ? <Image style={styles.jersey} source={require('../../../public/jerseys/1674-207-home.png')}/> :
+              this.props.teamStats.teamId === 1675 ? <Image style={styles.jersey} source={require('../../../public/jerseys/1675-207-home.png')}/> :
+              this.props.teamStats.teamId === 1677 ? <Image style={styles.jersey} source={require('../../../public/jerseys/1677-207-home.png')}/> :
+              this.props.teamStats.teamId === 1678 ? <Image style={styles.jersey} source={require('../../../public/jerseys/1678-207-home.png')}/> :
+              this.props.teamStats.teamId === 1679 ? <Image style={styles.jersey} source={require('../../../public/jerseys/1679-207-home.png')}/> :
+              <Image style={styles.jersey} source={require('../../../public/jerseys/0000-207-home.png')}/>
+              }
+            </View>
+            <View>
+              {
+              this.props.teamStats.teamId === 1667 ? <Image style={styles.jersey} source={require('../../../public/jerseys/1667-207-away.png')}/> :
+              this.props.teamStats.teamId === 1671 ? <Image style={styles.jersey} source={require('../../../public/jerseys/1671-207-away.png')}/> :
+              this.props.teamStats.teamId === 1672 ? <Image style={styles.jersey} source={require('../../../public/jerseys/1672-207-away.png')}/> :
+              this.props.teamStats.teamId === 1674 ? <Image style={styles.jersey} source={require('../../../public/jerseys/1674-207-away.png')}/> :
+              this.props.teamStats.teamId === 1675 ? <Image style={styles.jersey} source={require('../../../public/jerseys/1675-207-away.png')}/> :
+              this.props.teamStats.teamId === 1677 ? <Image style={styles.jersey} source={require('../../../public/jerseys/1677-207-away.png')}/> :
+              this.props.teamStats.teamId === 1678 ? <Image style={styles.jersey} source={require('../../../public/jerseys/1678-207-away.png')}/> :
+              this.props.teamStats.teamId === 1679 ? <Image style={styles.jersey} source={require('../../../public/jerseys/1679-207-away.png')}/> :
+              <Image style={styles.jersey} source={require('../../../public/jerseys/0000-207-home.png')}/>
+              }
+            </View>
+              {/* <Image style={styles.jersey} source={require("../../../public/jerseys/1678-207-home.png")}/>
+              <Image style={styles.jersey} source={require("../../../public/jerseys/1678-207-away.png")}/> */}
+            </View>
+            <View style={styles.jerseyType}>
+              <Text style={styles.titre}>Domicile</Text>
+              <Text style={styles.titre}>Extérieur</Text>
+            </View>
+              <View style={{height: 130,}}>
+
               </View>
-
-               <Image source={require("../../../public/jerseys/1667-207-away.png")}/>
-
             </ScrollView>
           </View>
     );
@@ -179,6 +233,7 @@ const styles = StyleSheet.create({
     paddingBottom:4,
     paddingTop:4,
     borderTopWidth: 1,
+    borderBottomWidth: 1,
     borderColor: '#D3D3D3',
     justifyContent: 'center',
     alignItems: 'center',
@@ -186,16 +241,16 @@ const styles = StyleSheet.create({
   },
   titre: {
     color: '#393E41',
-    height: 20,
+
     fontSize: 14,
     fontWeight: 'bold',
     marginTop: 0,
   },
   fondTitreClassement: {
-    marginTop: 8,
-    paddingBottom:4,
+
     paddingTop:4,
     borderTopWidth: 1,
+    borderBottomWidth: 1,
     borderColor: '#D3D3D3',
     justifyContent: 'center',
     alignItems: 'center',
@@ -208,9 +263,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 0,
   },
-  jerseyLeft:{
-
-
+  jersey:{
+    marginTop: 30,
+    width: 130,
+    height: 130,
+  },
+  jerseyType:{
+    marginTop: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   }
 });
 
