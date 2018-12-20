@@ -160,7 +160,7 @@ class DetailsScreen extends React.Component {
               {badgeMatch}
               </View>
 
-               <Image source={require("../../../public/jerseys/1667-207-away-PSG.png")}/>
+               <Image source={require("../../../public/jerseys/1667-207-away.png")}/>
 
             </ScrollView>
           </View>
