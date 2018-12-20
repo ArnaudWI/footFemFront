@@ -40,15 +40,6 @@ class GeneralScreen extends React.Component {
       if (i === team.length) {
         this.state.loading = false
       }
-      var follow = false;
-      for (var z in this.props.favoris) {
-        if (this.state.standings[team].team_id == this.props.favoris[z]) {
-          follow = true;
-        } else if (this.state.standings[team].team_id != this.props.favoris[z]) {
-          follow = false;
-        };
-      };
-      console.log(follow)
     return  <ClassementGeneralContent
         key={i}
         position={i}
@@ -60,7 +51,8 @@ class GeneralScreen extends React.Component {
         play={this.state.standings[team].play}
         points={this.state.standings[team].points}
         logo={this.state.standings[team].team_id}
-        follow={follow}
+        favoris={this.props.favoris}
+        team_id={this.state.standings[team].team_id}
       />
   });
 
@@ -117,9 +109,24 @@ class ClassementGeneralIndication extends React.Component {
 };
 
 class ClassementGeneralContent extends React.Component {
+  state={
+    follow:false
+  }
+
+componentDidMount(){
+  // console.log("this state folllow :", this.state.follow);
+  for (var z in this.props.favoris) {
+    if (this.props.team_id == this.props.favoris[z]) {
+      this.setState({follow:true});
+    }
+  };
+}
 
   render() {
-    console.log('dans le composant ClassementGeneralContent\n', this.props.follow ? styles.textIndicationFollow : styles.textIndication);
+
+
+
+
     return (
           <Grid style={styles.row}>
             <Col style={styles.colLeftClassement}>
@@ -154,7 +161,7 @@ class ClassementGeneralContent extends React.Component {
               <Image style={styles.logoTeam} source={require('../../../public/logo/logo_ol.png')}/>}
             </Col>
             <Col style={styles.colNameTeam}>
-              <Text style={this.props.follow ? styles.textIndicationFollow : styles.textIndicationBold}>{this.props.teamName.slice(0, -2)}</Text>
+              <Text style={this.state.follow ? styles.textIndicationFollow : styles.textIndicationBold}>{this.props.teamName.slice(0, -2)}</Text>
             </Col>
             <Col style={styles.colIndication}>
               <Text style={styles.textIndication}>{this.props.play}</Text>
