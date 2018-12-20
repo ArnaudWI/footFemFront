@@ -67,8 +67,8 @@ class StatsScreensList extends React.Component {
               }}
             />
             <ScrollView>
-              { this.state.selectedIndex === 0 ? <EffectifsScreen/> :
-                this.state.selectedIndex === 1 ? <DetailsScreen teamId={'1664'}/> :
+              { this.state.selectedIndex === 1 ? <EffectifsScreen/> :
+                this.state.selectedIndex === 0 ? <DetailsScreen teamId={'1664'}/> :
                 <Text>Erreur</Text>}
 
             </ScrollView>
