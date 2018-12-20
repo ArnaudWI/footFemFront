@@ -143,6 +143,7 @@ componentDidMount() {
               this.props.id === 1668 ? <Image style={styles.image} source={require('../../public/logo/logo_raf_2017.png')}/> :
               <Image style={styles.image} source={require('../../public/logo/logo_raf_2017.png')}/>
               }
+
             </Col>
             <Col style={styles.colTeam}>
               <Text

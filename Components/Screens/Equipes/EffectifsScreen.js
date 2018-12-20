@@ -553,7 +553,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   row: {
-    borderBottomWidth: 0.5,
+    borderTopWidth: 0.5,
     borderColor: 'lightgrey',
     marginTop: 0,
     height: 50,
@@ -587,7 +587,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   date: {
-    marginTop: 8,
     borderTopWidth: 1,
     borderColor: '#D3D3D3',
     justifyContent: 'center',
