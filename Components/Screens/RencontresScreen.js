@@ -1,11 +1,12 @@
 import React from 'react';
-import {View, Text, StyleSheet, ScrollView, Image, List, ListItem, Switch, Header} from 'react-native';
-import {Ionicons, MatterialCommunityIcons} from '@expo/vector-icons';
+import {View, Text, StyleSheet, ScrollView, Image, List, ListItem, Switch, Header, TouchableOpacity} from 'react-native';
+// import {Icon, MatterialCommunityIcons} from '@expo/vector-icons';
 import {Col, Row, Grid} from 'react-native-easy-grid';
 import {ButtonGroup} from 'react-native-elements';
-import {Spinner} from 'native-base';
+import {Spinner, Icon} from 'native-base';
 import HeaderScreen from '../Screens/HeaderScreen';
 import MatchScreen from '../Screens/MatchScreen';
+import Modal from "react-native-modal";
 
 import {connect} from 'react-redux';
 
@@ -162,7 +163,7 @@ class Journee extends React.Component {
       <Grid>
         <Col onPress={ ()=> this.props.refreshJournee(-1)} style={{alignItems: 'center'}}>
 
-            <Ionicons name="md-arrow-dropleft" size={26} color="#dddddd" />
+            <Icon name="md-arrow-dropleft" size={26} color="#dddddd" />
 
         </Col>
         <Col style={{alignItems: 'center', justifyContent: 'center'}}>
@@ -171,7 +172,7 @@ class Journee extends React.Component {
           <Text style={{color: '#dddddd', fontWeight: 'bold', fontSize: 16}}>{this.props.round}{this.props.round==1?'ère':'ème'} Journée</Text>
         </Col>
         <Col onPress={ ()=> this.props.refreshJournee(+1)} style={{alignItems: 'center'}}>
-          <Ionicons name="md-arrow-dropright" size={26} color="#dddddd" />
+          <Icon name="md-arrow-dropright" size={26} color="#dddddd" />
         </Col>
       </Grid>
     </View>
@@ -180,10 +181,34 @@ class Journee extends React.Component {
 };
 
 class Rencontres extends React.Component {
+
+  state = {
+    notif: false,
+    isModalVisible: false
+  }
+
+  onNotifPress = () => {
+    this.setState({notif: !this.state.notif});
+    if (!this.state.notif) {
+      this._toggleModal();
+    }
+  };
+
+  _toggleModal = () =>
+    this.setState({ isModalVisible: !this.state.isModalVisible });
+
   render() {
     return (
 
       <Grid style={styles.match}>
+        <Modal isVisible={this.state.isModalVisible}>
+          <View style={styles.modal}>
+            <Text style={styles.modalText}>Match suivi !</Text>
+            <TouchableOpacity onPress={this._toggleModal}>
+              <Text style={styles.modalButtonText}>OK</Text>
+            </TouchableOpacity>
+          </View>
+        </Modal>
           <Col>
           </Col>
           <Col onPress={()=>this.props.getMatch(this.props.fixtureId)} style={styles.colRencontres}>
@@ -259,7 +284,7 @@ class Rencontres extends React.Component {
             </Col>
           </Col>
           <Col style={styles.colStar}>
-            <Ionicons style={{paddingTop: '20%'}} name="md-notifications-outline" size={24} color="#393E41" />
+            <Icon onPress= {()=>this.onNotifPress()} style={this.state.notif ? {color:"#FAC05E", paddingTop: '20%'} : {color:"#393E41", paddingTop: '20%'}} name={this.state.notif ? "md-notifications" : "md-notifications-outline"} size={24}/>
           </Col>
 
       </Grid>
@@ -287,7 +312,6 @@ function mapDispatchToProps(dispatch) {
 };
 
 export default connect(null, mapDispatchToProps)(RencontresScreen);
-
 
 const styles = StyleSheet.create({
   container: {
@@ -380,4 +404,23 @@ const styles = StyleSheet.create({
     height: 25,
     width: 25
   },
+  modalText: {
+    fontSize: 25,
+    marginBottom: 5
+  },
+  modalButtonText: {
+    backgroundColor: '#4B85EA',
+    color: '#F6F7EB',
+    margin: 5,
+    borderRadius: 50,
+    fontSize: 25,
+    padding: 10
+  },
+  modal: {
+    flex: 0.5,
+    backgroundColor: '#F6F7EB',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 20,
+  }
 });
