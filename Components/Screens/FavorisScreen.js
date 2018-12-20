@@ -19,9 +19,9 @@ import {connect} from 'react-redux';
 
 class FavorisScreen extends React.Component {
 
-state = {
-      teams: {},
-    };
+  state = {
+    teams: {},
+  };
 
   componentDidMount() {
     fetch('https://footfembackend.herokuapp.com/teams/')
@@ -57,7 +57,7 @@ state = {
     var teamData = Object.keys(this.state.teams)
 
     var teamList = teamData.map(function(i) {
-      return <TeamsNav onStarClick={ctx.props.onStarClick} key={i} teamName={ctx.state.teams[i].name} id={ctx.state.teams[i].api_id}/>;
+      return <TeamsNav onStarClick={ctx.props.onStarClick} onTextClick={ctx.props.onTextClick} key={i} teamName={ctx.state.teams[i].name} id={ctx.state.teams[i].api_id}/>;
     });
 
     return (
@@ -98,8 +98,9 @@ state = {
     _toggleModal = () =>
       this.setState({ isModalVisible: !this.state.isModalVisible });
 
-    onTextPress = () => {
+    onTextPress = (id, teamName) => {
       this.props.navigation.navigate('Notifications');
+      this.props.onTextClick(id, teamName);
     };
 
     render() {
@@ -140,7 +141,7 @@ state = {
             </Col>
             <Col style={styles.colTeam}>
               <Text
-                onPress={this.onTextPress}
+                onPress={()=>this.onTextPress(this.props.id, this.props.teamName)}
                 style={styles.team}>{this.props.teamName.slice(0, -2)}</Text>
             </Col>
             <Col style={styles.colStar}>
@@ -160,11 +161,13 @@ state = {
     return {
       onStarClick: function(id) {
         dispatch( {type: 'addFavoris', id} )
+      },
+      onTextClick: function(id, teamName) {
+        dispatch( {type: 'goNotif', id, teamName} )
       }
     };
   }
 
-  // export default FavorisScreen;
   export default connect(null, mapDispatchToProps)(FavorisScreen);
 
   const styles = StyleSheet.create({

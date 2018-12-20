@@ -17,20 +17,30 @@ class RencontresScreen extends React.Component {
     this.state={
       journee: {},
       round: null,
+      ts:0,
       loading: true,
     };
   }
-
-  componentDidMount() {
+  //récupération des matchs de la journée actuelle
+ componentDidMount() {
     fetch('https://footfembackend.herokuapp.com/journee')
       .then(response => response.json())
       .then(data => {
+        var tableauMatchs=[...data.matchs];
+        tableauMatchs.sort(function(a, b) {
+        return a.event_timestamp - b.event_timestamp
+      })
+      console.log(tableauMatchs);
+      var roundTS = new Date(Number(tableauMatchs[0].event_timestamp)*1000);
+         var day = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+         var month = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', "août", "septembre", "octobre", "novembre", "décembre"];
         this.setState({
           journee: data.matchs,
-          round: data.round
+          round: data.round,
+          ts:day[roundTS.getDay()]+' '+roundTS.getDate()+' '+ month[roundTS.getMonth()]+ ' ' + roundTS.getFullYear()
         })
       });
-
+//récupération du classement
       fetch('https://footfembackend.herokuapp.com/standings/')
         .then(response => response.json())
         .then(data => {
@@ -51,11 +61,19 @@ class RencontresScreen extends React.Component {
     fetch('https://footfembackend.herokuapp.com/journee/'+journee)
       .then(response => response.json())
       .then(data => {
+        var tableauMatchs=[...data.matchs];
+        tableauMatchs.sort(function(a, b) {
+        return a.event_timestamp - b.event_timestamp
+      })
+      console.log(tableauMatchs);
+      var roundTS = new Date(Number(tableauMatchs[0].event_timestamp)*1000);
+         var day = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+         var month = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', "août", "septembre", "octobre", "novembre", "décembre"];
         this.setState({
           journee: data.matchs,
-          round: data.round
+          round: data.round,
+          ts:day[roundTS.getDay()]+' '+roundTS.getDate()+' '+ month[roundTS.getMonth()]+ ' ' + roundTS.getFullYear()
         })
-        console.log(data.round)
       });
   }
 
@@ -108,12 +126,15 @@ class RencontresScreen extends React.Component {
         <HeaderScreen title={'Rencontres'}/>
         <Journee round={this.state.round} refreshJournee={this.refreshJournee}/>
       <ScrollView>
-        {/* <View style={styles.date}>
+
+          <View style={styles.date}>
           <Text style={styles.eventDate}>
-            Samedi 15 Janvier
+
+            {this.state.ts}
           </Text>
 
-        </View> */}
+        </View>
+
         {match}
 
         </ScrollView>

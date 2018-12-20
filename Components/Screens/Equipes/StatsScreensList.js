@@ -27,7 +27,7 @@ class StatsScreensList extends React.Component {
   }
 
   render() {
-    const buttons = ['Matchs', 'Effectifs', 'Détails']
+    const buttons = ['Effectifs', 'Détails']
     const { selectedIndex } = this.state
 
     return (
@@ -67,9 +67,8 @@ class StatsScreensList extends React.Component {
               }}
             />
             <ScrollView>
-              {this.state.selectedIndex === 0 ? <MatchsScreen/> :
-                this.state.selectedIndex === 1 ? <EffectifsScreen/> :
-                this.state.selectedIndex === 2 ? <DetailsScreen teamId={'1664'}/> :
+              { this.state.selectedIndex === 0 ? <EffectifsScreen/> :
+                this.state.selectedIndex === 1 ? <DetailsScreen teamId={'1664'}/> :
                 <Text>Erreur</Text>}
 
             </ScrollView>
