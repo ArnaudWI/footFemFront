@@ -40,6 +40,14 @@ class GeneralScreen extends React.Component {
       if (i === team.length) {
         this.state.loading = false
       }
+
+    var favoris = false;
+    for (var z in this.props.favoris) {
+      if (this.state.standings[team].team_id == this.props.favoris[z]) {
+         favoris = true;
+       }
+     }
+
     return  <ClassementGeneralContent
         key={i}
         position={i}
@@ -51,7 +59,7 @@ class GeneralScreen extends React.Component {
         play={this.state.standings[team].play}
         points={this.state.standings[team].points}
         logo={this.state.standings[team].team_id}
-        favoris={this.props.favoris}
+        follow={favoris}
         team_id={this.state.standings[team].team_id}
       />
   });
@@ -115,11 +123,11 @@ class ClassementGeneralContent extends React.Component {
 
 componentDidMount(){
   // console.log("this state folllow :", this.state.follow);
-  for (var z in this.props.favoris) {
-    if (this.props.team_id == this.props.favoris[z]) {
-      this.setState({follow:true});
-    }
-  };
+  // for (var z in this.props.favoris) {
+  //   if (this.props.team_id == this.props.favoris[z]) {
+  //     this.setState({follow:true});
+  //   }
+  // };
 }
 
   render() {
@@ -161,7 +169,7 @@ componentDidMount(){
               <Image style={styles.logoTeam} source={require('../../../public/logo/logo_ol.png')}/>}
             </Col>
             <Col style={styles.colNameTeam}>
-              <Text style={this.state.follow ? styles.textIndicationFollow : styles.textIndicationBold}>{this.props.teamName.slice(0, -2)}</Text>
+              <Text style={this.props.follow ? styles.textIndicationFollow : styles.textIndicationBold}>{this.props.teamName.slice(0, -2)}</Text>
             </Col>
             <Col style={styles.colIndication}>
               <Text style={styles.textIndication}>{this.props.play}</Text>
