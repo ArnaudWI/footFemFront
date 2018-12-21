@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, ScrollView, Button} from 'react-native';
+import {View, Text, ScrollView, Button, StyleSheet} from 'react-native';
 import {ButtonGroup} from 'react-native-elements';
 
 
@@ -27,12 +27,12 @@ class StatsScreensList extends React.Component {
   }
 
   render() {
-    const buttons = ['Effectifs', 'Détails']
+    const buttons = ['Détails', 'Effectifs']
     const { selectedIndex } = this.state
 
     return (
 
-          <View>
+          <View style={styles.container}>
             <HeaderScreen title={this.props.teamStats.teamName}/>
             <ButtonGroup
               onPress={this.updateIndex}
@@ -76,6 +76,13 @@ class StatsScreensList extends React.Component {
     );
   };
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#F6F7EB'
+  },
+})
 
 function mapStateToProps(state) {
   return {

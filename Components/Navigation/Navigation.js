@@ -14,10 +14,12 @@ import EquipesScreen from '../Screens/EquipesScreen';
 import NotificationsScreen from '../Screens/NotificationsScreen';
 import StatsScreensList from '../Screens/Equipes/StatsScreensList';
 import MatchScreen from '../Screens/MatchScreen';
+import HomeScreen from '../Screens/HomeScreen';
 
 
 // création de ma bottom navigation
 const MainBottomNavigator = createBottomTabNavigator({
+  HomeScreen: HomeScreen,
   Rencontres: RencontresScreen,
   Classement: ClassementScreen,
   Favoris: FavorisScreen,
@@ -38,6 +40,8 @@ const MainBottomNavigator = createBottomTabNavigator({
         iconName = 'ios-star';
       } else if (navigation.state.routeName == 'Equipes') {
         iconName = 'ios-shirt';
+      }else if (navigation.state.routeName == 'HomeScreen') {
+        iconName = 'ios-home';
       }
 
       return <Ionicons name={iconName + outline} size={25} color={tintColor}/>;

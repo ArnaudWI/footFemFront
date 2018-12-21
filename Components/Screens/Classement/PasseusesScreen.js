@@ -103,6 +103,9 @@ export default class PasseusesScreen extends React.Component {
             <ScrollView>
               {passeuses}
             </ScrollView>
+            <View style={{height: 130}}>
+
+            </View>
           </View>
     );
   };

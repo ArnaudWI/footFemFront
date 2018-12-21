@@ -103,6 +103,9 @@ export default class ButeusesScreen extends React.Component {
             <ScrollView>
               {buteuses}
             </ScrollView>
+            <View style={{height: 130}}>
+
+            </View>
           </View>
     );
   };

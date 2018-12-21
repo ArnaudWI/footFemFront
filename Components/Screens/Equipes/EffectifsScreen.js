@@ -527,6 +527,9 @@ class ClassementButeusesContent extends React.Component {
           <Image style={styles.logoTeam} source={require('../../../public/flag-icons/FR.png')}/>
         </Col>
       </Grid>
+      <View style={{height: 130}}>
+
+      </View>
     </View>);
   };
 };

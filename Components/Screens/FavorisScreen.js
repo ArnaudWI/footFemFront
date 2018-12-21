@@ -223,7 +223,7 @@ class FavorisScreen extends React.Component {
       justifyContent: 'center',
     },
     modalText: {
-      fontSize: 25,
+      fontSize: 20,
       marginBottom: 5
     },
     modalButtonText: {
@@ -231,11 +231,11 @@ class FavorisScreen extends React.Component {
       color: '#F6F7EB',
       margin: 5,
       borderRadius: 50,
-      fontSize: 25,
+      fontSize: 20,
       padding: 10
     },
     modal: {
-      flex: 0.5,
+      flex: 0.2,
       backgroundColor: '#F6F7EB',
       justifyContent: 'center',
       alignItems: 'center',

@@ -213,7 +213,7 @@ class DetailsScreen extends React.Component {
               <Text style={styles.titre}>Domicile</Text>
               <Text style={styles.titre}>Extérieur</Text>
             </View>
-              <View style={{height: 130,}}>
+              <View style={{height: 130}}>
 
               </View>
             </ScrollView>

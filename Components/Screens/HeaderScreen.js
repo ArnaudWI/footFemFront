@@ -53,6 +53,7 @@ class HeaderToggle extends React.Component {
       color: "#FFFFFF",
       textAlign: 'center',
       fontSize: 25,
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      marginTop: 20
     }
   });

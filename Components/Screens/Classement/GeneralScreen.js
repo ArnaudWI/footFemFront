@@ -64,7 +64,7 @@ class GeneralScreen extends React.Component {
       );
   } else {
     return (
-      <View>
+      <View style={styles.container}>
         <ScrollView>
           <ClassementGeneralIndication/>
           {classement}
@@ -143,7 +143,7 @@ componentDidMount(){
             <Col style={styles.colLeftClassement}>
               {/* <Ionicons name="md-arrow-round-down" size={15} color="#EE6352" />
               <Ionicons name="md-arrow-round-up" size={15} color="#59CD90" /> */}
-              <Ionicons name="md-remove" size={15} color="#FAC05E" />
+              <Ionicons name="md-remove" size={15} color="#393E41" />
             </Col>
             <Col style={styles.colLogoTeam}>
               {this.props.logo === '1674' ? <Image style={styles.logoTeam} source={require('../../../public/logo/logo_ol.png')}/> :

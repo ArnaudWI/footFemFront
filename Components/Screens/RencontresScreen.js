@@ -7,6 +7,7 @@ import {Spinner, Icon} from 'native-base';
 import HeaderScreen from '../Screens/HeaderScreen';
 import MatchScreen from '../Screens/MatchScreen';
 import Modal from "react-native-modal";
+import {Ionicons, MatterialCommunityIcons} from '@expo/vector-icons';
 
 import {connect} from 'react-redux';
 
@@ -163,7 +164,7 @@ class Journee extends React.Component {
       <Grid>
         <Col onPress={ ()=> this.props.refreshJournee(-1)} style={{alignItems: 'center'}}>
 
-            <Icon name="md-arrow-dropleft" size={26} color="#dddddd" />
+            <Ionicons name="md-arrow-dropleft" size={26} color="#dddddd" />
 
         </Col>
         <Col style={{alignItems: 'center', justifyContent: 'center'}}>
@@ -172,7 +173,7 @@ class Journee extends React.Component {
           <Text style={{color: '#dddddd', fontWeight: 'bold', fontSize: 16}}>{this.props.round}{this.props.round==1?'ère':'ème'} Journée</Text>
         </Col>
         <Col onPress={ ()=> this.props.refreshJournee(+1)} style={{alignItems: 'center'}}>
-          <Icon name="md-arrow-dropright" size={26} color="#dddddd" />
+          <Ionicons name="md-arrow-dropright" size={26} color="#dddddd" />
         </Col>
       </Grid>
     </View>
@@ -405,7 +406,7 @@ const styles = StyleSheet.create({
     width: 25
   },
   modalText: {
-    fontSize: 25,
+    fontSize: 20,
     marginBottom: 5
   },
   modalButtonText: {
@@ -413,11 +414,11 @@ const styles = StyleSheet.create({
     color: '#F6F7EB',
     margin: 5,
     borderRadius: 50,
-    fontSize: 25,
+    fontSize: 20,
     padding: 10
   },
   modal: {
-    flex: 0.5,
+    flex: 0.2,
     backgroundColor: '#F6F7EB',
     justifyContent: 'center',
     alignItems: 'center',
