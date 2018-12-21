@@ -565,7 +565,7 @@ const styles = StyleSheet.create({
   colLeftClassement: {
     alignItems: 'flex-end',
     justifyContent: 'center',
-    width: '10%',
+    width: '12%',
     paddingLeft: "3%",
   },
   colNameButeuses: {
